@@ -1,6 +1,25 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Speed_reader;
 
-var text = "Hello, fellas. How we doing? We doin'? Doing well? I hope so. I haven't had the best of days myself, so I hope you're faring better.";
-var speedReader = new SpeedReader(300, text);
+string? text;
+
+do
+{
+    Console.Write("Enter text for speedreading: ");
+    text = Console.ReadLine();
+}
+while (text is null);
+
+decimal speed;
+bool numberEntered;
+
+do
+{
+    Console.Write("Enter the speed you wish to read the text at — in Words Per Minute (WPM): ");
+    numberEntered = decimal.TryParse(Console.ReadLine(), out speed);
+}
+while (!numberEntered);
+
+var speedReader = new SpeedReader(speed, text);
+
 speedReader.SpeedReadText();
