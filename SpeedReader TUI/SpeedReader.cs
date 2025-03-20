@@ -79,6 +79,9 @@ namespace Speed_reader
 
         public void SpeedReadText()
         {
+            if (Text is null)
+                return;
+
             string[] words = ConvertTextToWords();
             decimal milisecondsPerWord = MilisecondsPerWord();
 
