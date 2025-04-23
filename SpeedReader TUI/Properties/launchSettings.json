@@ -1,0 +1,11 @@
+{
+  "profiles": {
+    "Command Line arguments": {
+      "commandName": "Project",
+      "commandLineArgs": "60 \"A little helping of the spoon...\""
+    },
+    "No Command Line Arguments": {
+      "commandName": "Project"
+    }
+  }
+}

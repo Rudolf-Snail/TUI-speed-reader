@@ -9,7 +9,7 @@ namespace Speed_reader
     internal class SpeedReader
     {
         // Fields
-        private decimal wordsPerMinute = 0;
+        private decimal wordsPerMinute = 60;
         private string? text;
         private string? currentWord;
 
