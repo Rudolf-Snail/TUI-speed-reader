@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Speed_reader
+﻿namespace Speed_reader
 {
     internal class SpeedReader
     {
@@ -63,8 +57,7 @@ namespace Speed_reader
             if (Text is null)
                 return Array.Empty<string>();
 
-            char separator = ' ';
-            string[] words = Text.Split(separator);
+            string[] words = Text.Split(new char[] { ' ', '\r', '\n', '\t'}, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 
             return words;
         }
