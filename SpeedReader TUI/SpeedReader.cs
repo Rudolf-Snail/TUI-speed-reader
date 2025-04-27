@@ -57,7 +57,7 @@
             if (Text is null)
                 return Array.Empty<string>();
 
-            string[] words = Text.Split(new char[] { ' ', '\r', '\n', '\t'}, StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+            string[] words = Text.Split(Array.Empty<string>(), StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 
             return words;
         }
