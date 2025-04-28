@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("SpeedReader TUI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+e57201ca93dd4b9c0867f44924d30586ceb04076")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fbe35abf485e1df48013073bd7819836c4b2b052")]
 [assembly: System.Reflection.AssemblyProductAttribute("SpeedReader TUI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("SpeedReader TUI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

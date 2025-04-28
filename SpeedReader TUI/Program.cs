@@ -11,6 +11,7 @@ do
     Console.WriteLine("Options:");
     Console.WriteLine("Type in Text, if you wish to read text from the command line.");
     Console.WriteLine("Type in File, if you wish to read text from a file.");
+    //TODO: Add option for padding text. 
 
     Console.Write("Type in the name of the option you wish to choose: ");
     isValidOption = Enum.TryParse<TextOptions>(ToCapital(Console.ReadLine()), out option);
@@ -26,6 +27,7 @@ switch (option)
     case TextOptions.File:
         text = FileUserInput();
         break;
+    //TODO: Add option for padding text. 
     default:
         throw new ArgumentException($"The specified option — {option.ToString()} — is not valid."); // Should not happen, but it's handled by throwing an error just in case.
 }
@@ -40,7 +42,8 @@ do
 }
 while (!numberEntered || speed <= 0);
 
-var speedReader = new SpeedReader(speed, text);
+//TODO: Appropriately factor in the padding variables for text. 
+var speedReader = new SpeedReader(speed, text, false, false);
 
 speedReader.SpeedReadText();
 
