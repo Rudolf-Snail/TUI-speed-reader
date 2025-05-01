@@ -399,21 +399,7 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
-/.vs/SpeedReader TUI/DesignTimeBuild/.dtbcache.v2
-/.vs/SpeedReader TUI/FileContentIndex/a159d3f0-9fe6-4de0-a857-6262eae7bb9f.vsidx
-/.vs/SpeedReader TUI/FileContentIndex/b86bf348-92ba-4bb4-974a-16eb2772dc5f.vsidx
-/.vs/SpeedReader TUI/FileContentIndex/f0441415-4465-456f-889f-5291305a0efa.vsidx
-/.vs/SpeedReader TUI/v17/.suo
-/.vs/SpeedReader TUI/v17/DocumentLayout.backup.json
-/.vs/SpeedReader TUI/v17/DocumentLayout.json
-/SpeedReader TUI/bin/Debug/net8.0/SpeedReader TUI.dll
-/SpeedReader TUI/bin/Debug/net8.0/SpeedReader TUI.exe
-/SpeedReader TUI/bin/Debug/net8.0/SpeedReader TUI.pdb
-/SpeedReader TUI/obj/Debug/net8.0/apphost.exe
-/SpeedReader TUI/obj/Debug/net8.0/ref/SpeedReader TUI.dll
-/SpeedReader TUI/obj/Debug/net8.0/refint/SpeedReader TUI.dll
-/SpeedReader TUI/obj/Debug/net8.0/SpeedReader TUI.AssemblyInfo.cs
-/SpeedReader TUI/obj/Debug/net8.0/SpeedReader TUI.AssemblyInfoInputs.cache
-/SpeedReader TUI/obj/Debug/net8.0/SpeedReader TUI.csproj.FileListAbsolute.txt
-/SpeedReader TUI/obj/Debug/net8.0/SpeedReader TUI.dll
-/SpeedReader TUI/obj/Debug/net8.0/SpeedReader TUI.pdb
+SpeedReader TUI/bin/
+SpeedReader TUI/obj/
+.vs/
+nppBackup/
