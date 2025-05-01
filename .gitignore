@@ -399,6 +399,7 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 
+# Personal removals
 SpeedReader TUI/bin/
 SpeedReader TUI/obj/
 .vs/
