@@ -1,6 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using Speed_reader;
 
+Console.Title = "Speed reader";
+
 bool isValidOption;
 TextOptions option;
 
