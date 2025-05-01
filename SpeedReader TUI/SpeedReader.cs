@@ -110,25 +110,15 @@
             ProcessWord wordProcessor;
 
             if (!AlignHorizontally && !AlignVertically)
-            {
                 wordProcessor = DoNotAlignWord;
-                SpeedReadWords(words, milisecondsPerWord, wordProcessor);
-            }
             else if (AlignHorizontally && !AlignVertically)
-            {
                 wordProcessor = AlignWordHorizontally;
-                SpeedReadWords(words, milisecondsPerWord, wordProcessor);
-            }
             else if (!AlignHorizontally && AlignVertically)
-            {
                 wordProcessor = AlignWordVertically;
-                SpeedReadWords(words, milisecondsPerWord, wordProcessor);
-            }
             else
-            {
                 wordProcessor = CenterWord;
-                SpeedReadWords(words, milisecondsPerWord, wordProcessor);
-            } 
+
+            SpeedReadWords(words, milisecondsPerWord, wordProcessor);
         }
 
         private void SpeedReadWords(string[] words, decimal milisecondsPerWord, ProcessWord wordProcessor)
