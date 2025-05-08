@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 using System.Configuration;
 using SpeedReaderTextUserInterface;
+using static SpeedReaderTextUserInterface.Input;
 
 Console.Title = "Speed reader";
 
