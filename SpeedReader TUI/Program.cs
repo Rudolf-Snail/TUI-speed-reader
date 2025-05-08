@@ -28,23 +28,13 @@ if (!gotDefaultValueForHorizontalAlignment || !gotDefaultValueForVerticalAlignme
 {
     alignHorizontally = false;
     alignVertically = false;
-}    
+}
 
 ProcessUserInput(out text, ref alignHorizontally, ref alignVertically);
 decimal speed = SetReadingSpeed();
 
 var speedReader = new SpeedReader(speed, text, alignHorizontally, alignVertically);
 speedReader.SpeedReadText();
-
-static string? ToCapital(string? text)
-{
-    if (string.IsNullOrEmpty(text))
-        return text;
-    else if (text.Length == 1)
-        return text.ToUpper();
-    else
-        return text.Substring(0, 1).ToUpper() + text.Substring(1).ToLower();
-}
 
 static void ConfigureAlignmentSettings(out bool isValidOption, out bool alignHorizontally, out bool alignVertically)
 {
@@ -152,13 +142,13 @@ static string FileUserInput()
         fileAvailable = File.Exists(path);
     } while (!fileAvailable);
 
-#pragma warning disable CS8604 // Possible null reference argument. Disabled becaused FileExists also checks if the string is null and returns false if it is, so it is (or very likely should be) impossible to get through the do-while loop with a null value.
     // I WANT this to throw an error, if it doesn't find the path, as trying to catch the error and work around it is too difficult and not worth it for me, it's easier to crash the whole program and try again, than to figure out how to solve this issue. 
+    #pragma warning disable CS8604 // Possible null reference argument. Disabled becaused FileExists also checks if the string is null and returns false if it is, so it is (or very likely should be) impossible to get through the do-while loop with a null value.
     using (StreamReader reader = new(path))
     {
         text = reader.ReadToEnd();
     }
-#pragma warning restore CS8604 // Possible null reference argument.
+    #pragma warning restore CS8604 // Possible null reference argument.
 
     return text;
 }
@@ -185,12 +175,4 @@ static void ChangeConfiguration(string key, string value)
     settings[key].Value = value;
     configFile.Save(ConfigurationSaveMode.Modified);
     ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
-}
-
-enum TextOptions
-{
-    Text,
-    File,
-    Align,
-    Reset
 }
