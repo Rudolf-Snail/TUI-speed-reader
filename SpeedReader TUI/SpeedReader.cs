@@ -91,12 +91,12 @@
             return words;
         }
 
-        public decimal MilisecondsPerWord()
+        public decimal MillisecondsPerWord()
         {
-            decimal milisecondsInAMinute = 60 * 1000;
-            decimal milisecondsPerWord = milisecondsInAMinute / WordsPerMinute;
+            decimal millisecondsInAMinute = 60 * 1000;
+            decimal millisecondsPerWord = millisecondsInAMinute / WordsPerMinute;
 
-            return milisecondsPerWord;
+            return millisecondsPerWord;
         }
 
         public void SpeedReadText()
@@ -105,7 +105,7 @@
                 return;
 
             string[] words = ConvertTextToWords();
-            decimal milisecondsPerWord = MilisecondsPerWord();
+            decimal millisecondsPerWord = MillisecondsPerWord();
 
             ProcessWord wordProcessor;
 
@@ -118,10 +118,10 @@
             else
                 wordProcessor = CenterWord;
 
-            SpeedReadWords(words, milisecondsPerWord, wordProcessor);
+            SpeedReadWords(words, millisecondsPerWord, wordProcessor);
         }
 
-        private void SpeedReadWords(string[] words, decimal milisecondsPerWord, ProcessWord wordProcessor)
+        private void SpeedReadWords(string[] words, decimal millisecondsPerWord, ProcessWord wordProcessor)
         {
             int width = Console.WindowWidth;
             int height = Console.WindowHeight;
@@ -133,7 +133,7 @@
                 CurrentWord = word;
                 Console.WriteLine(wordProcessor(word, width, height));
 
-                Task.Delay(( int ) milisecondsPerWord).Wait();
+                Task.Delay(( int ) millisecondsPerWord).Wait();
             }
         }
 
