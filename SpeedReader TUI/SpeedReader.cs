@@ -1,4 +1,4 @@
-﻿namespace Speed_reader
+﻿namespace SpeedReaderTextUserInterface
 {
     internal class SpeedReader
     {
