@@ -30,6 +30,14 @@ namespace SpeedReaderTextUserInterface
             return parsedValue;
         }
 
+        public static T ReceiveCorrectInputValues(string[] messageToWriteToConsole, ReadAndProcessInput readAndProcessInput,
+                                                  SuccessCondition successCondition, string incorrectDataMessage = "This option is not correct, please try again.")
+        {
+            string message = String.Concat(messageToWriteToConsole);
+
+            return ReceiveCorrectInputValues(message, readAndProcessInput, successCondition, incorrectDataMessage);
+        }
+
         private static System.Reflection.MethodInfo? GetTryParseMethodBasedOnType()
         {
             System.Reflection.MethodInfo? TryParseMethod;
