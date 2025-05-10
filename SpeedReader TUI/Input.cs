@@ -21,6 +21,13 @@
             return Console.ReadLine();
         }
 
+        public static string? ReadAndTrimWhitespaces()
+        {
+            string? input = JustReadInput();
+
+            return input?.Trim();
+        }
+
         public static string? ReadAndCapitalizeInput()
         {
             return ToCapital(JustReadInput());
