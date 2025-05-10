@@ -84,7 +84,7 @@
         public string[] ConvertTextToWords()
         {
             if (Text is null)
-                return Array.Empty<string>();
+                return [];
 
             string[] words = Text.Split(Array.Empty<string>(), StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 
