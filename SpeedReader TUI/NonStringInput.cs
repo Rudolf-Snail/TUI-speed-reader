@@ -69,11 +69,11 @@ namespace SpeedReaderTextUserInterface
                 parsedValueIndex = 2;
             }
 
-            parsedValue = ParseValue(readAndProcessInput, out parsedSuccessfully, TryParseMethod, parameters, parsedValueIndex);
+            parsedValue = ParseValue(out parsedSuccessfully, TryParseMethod, parameters, parsedValueIndex);
         }
 
-        private static T ParseValue(Input.ReadAndProcessInput readAndProcessInput, out bool parsedSuccessfully,
-                                        System.Reflection.MethodInfo TryParseMethod, object?[] parameters, int parsedValueIndex)
+        private static T ParseValue(out bool parsedSuccessfully, System.Reflection.MethodInfo TryParseMethod,
+                                        object?[] parameters, int parsedValueIndex)
         {
             parsedSuccessfully = ( bool? ) TryParseMethod.Invoke(null, parameters) ?? false;
 
