@@ -33,6 +33,17 @@ namespace SpeedReaderTextUserInterface
             return !string.IsNullOrEmpty(parsedValue);
         }
 
+        public static bool FileExists(ref string? parsedValue)
+        {
+            if (IsNotNullOrEmpty(ref parsedValue))
+            {
+                // Once again: this is checked, but the code analysis/compiler doesn't see it.
+                #pragma warning disable CS8602 // Dereference of a possibly null reference.
+                parsedValue = parsedValue.Trim('\"');
+                #pragma warning restore CS8602 // Dereference of a possibly null reference.
+            }
+
+            return File.Exists(parsedValue);
         }
     }
 }
