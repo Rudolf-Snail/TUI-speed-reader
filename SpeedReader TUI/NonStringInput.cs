@@ -87,14 +87,14 @@ namespace SpeedReaderTextUserInterface
         }
 
         // Delegates
-        public delegate bool SuccessCondition(bool parsedSuccessfully, T parsedValue);
+        public delegate bool SuccessCondition(bool parsedSuccessfully, ref T parsedValue);
 
-        public static bool IsParsedCorrectly(bool parsedSuccessfully, T parsedValue)
+        public static bool IsParsedCorrectly(bool parsedSuccessfully, ref T _)
         {
             return parsedSuccessfully;
         }
 
-        public static bool IsPositiveNumber(bool parsedSuccessfully, decimal parsedValue)
+        public static bool IsPositiveNumber(bool parsedSuccessfully, ref decimal parsedValue)
         {
             return parsedSuccessfully && parsedValue > 0;
         }
