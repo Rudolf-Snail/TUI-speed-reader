@@ -16,7 +16,7 @@ namespace SpeedReaderTextUserInterface
 
                 text = readAndProcessInput();
 
-                if (!successCondition(text))
+                if (!successCondition(ref text))
                     Console.WriteLine(incorrectDataMessage);
                 else
                     break;
@@ -26,9 +26,9 @@ namespace SpeedReaderTextUserInterface
         }
 
         // Delegates
-        public delegate bool SuccessCondition(string? parsedValue);
+        public delegate bool SuccessCondition(ref string? parsedValue);
 
-        public static bool IsNullOrEmpty(string? parsedValue)
+        public static bool IsNotNullOrEmpty(ref string? parsedValue)
         {
             return string.IsNullOrEmpty(parsedValue);
         }
