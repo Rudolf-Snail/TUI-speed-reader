@@ -5,8 +5,8 @@ namespace SpeedReaderTextUserInterface
     internal static class StringInput
     {
         // Methods
-        public static string? ReceiveCorrectInputValues(string messageToWriteToConsole, string incorrectDataMessage, 
-                                                        ReadAndProcessInput readAndProcessInput, SuccessCondition successCondition)
+        public static string? ReceiveCorrectInputValues(string messageToWriteToConsole, ReadAndProcessInput readAndProcessInput,
+                                                        SuccessCondition successCondition, string incorrectDataMessage = "This option is not correct, please try again.")
         {
             string? text;
             
