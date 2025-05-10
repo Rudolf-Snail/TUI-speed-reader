@@ -30,7 +30,9 @@ namespace SpeedReaderTextUserInterface
 
         public static bool IsNotNullOrEmpty(ref string? parsedValue)
         {
-            return string.IsNullOrEmpty(parsedValue);
+            return !string.IsNullOrEmpty(parsedValue);
+        }
+
         }
     }
 }
