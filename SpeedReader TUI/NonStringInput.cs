@@ -5,8 +5,8 @@ namespace SpeedReaderTextUserInterface
     internal static class NonStringInput<T> where T : struct
     {
         // Methods
-        public static T ReceiveCorrectInputValues(string messageToWriteToConsole, string incorrectDataMessage, 
-                                                  ReadAndProcessInput readAndProcessInput, SuccessCondition successCondition)
+        public static T ReceiveCorrectInputValues(string messageToWriteToConsole, ReadAndProcessInput readAndProcessInput,
+                                                  SuccessCondition successCondition, string incorrectDataMessage = "This option is not correct, please try again.")
         {
             bool parsedSuccessfully;
             var TryParseMethod = GetTryParseMethodBasedOnType();
