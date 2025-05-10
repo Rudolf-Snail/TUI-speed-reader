@@ -8,8 +8,7 @@ namespace SpeedReaderTextUserInterface
         public static T ReceiveCorrectInputValues(string messageToWriteToConsole, ReadAndProcessInput readAndProcessInput,
                                                   SuccessCondition successCondition, string incorrectDataMessage = "This option is not correct, please try again.")
         {
-            bool parsedSuccessfully;
-            var TryParseMethod = GetTryParseMethodBasedOnType();
+            System.Reflection.MethodInfo? TryParseMethod = GetTryParseMethodBasedOnType();
 
             if (TryParseMethod == null)
                 throw new MissingMethodException("The generic struct type you used for the Input class does not have a TryParse method.");
@@ -20,7 +19,7 @@ namespace SpeedReaderTextUserInterface
             {
                 Console.Write(messageToWriteToConsole);
 
-                ParseValueBasedOnType(out parsedSuccessfully, out parsedValue, readAndProcessInput, TryParseMethod);
+                ParseValueBasedOnType(out bool parsedSuccessfully, out parsedValue, readAndProcessInput, TryParseMethod);
 
                 if (!successCondition(parsedSuccessfully, parsedValue))
                     Console.WriteLine(incorrectDataMessage);
