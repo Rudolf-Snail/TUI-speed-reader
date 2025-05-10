@@ -9,7 +9,7 @@ namespace SpeedReaderTextUserInterface
                                                         SuccessCondition successCondition, string incorrectDataMessage = "This option is not correct, please try again.")
         {
             string? text;
-            
+
             while (true)
             {
                 Console.Write(messageToWriteToConsole);

@@ -48,7 +48,7 @@ namespace SpeedReaderTextUserInterface
             else
                 // Need to make the third parameter referential with MakeByRefType, because otherwise it won't find it, since it is an out parameter
                 TryParseMethod = typeof(Enum).GetMethod("TryParse", [typeof(Type), typeof(string), typeof(object).MakeByRefType()]);
-            
+
             return TryParseMethod;
         }
 
