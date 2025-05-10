@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using System.Configuration;
 using SpeedReaderTextUserInterface;
+using System.Configuration;
+using static SpeedReaderTextUserInterface.AppSettingsConfigurationFile;
 using static SpeedReaderTextUserInterface.Input;
 
 Console.Title = "Speed reader";
@@ -18,34 +19,14 @@ Console.Title = "Speed reader";
 
 */
 
-string? text;
-bool alignHorizontally, alignVertically;
+bool gotDefaultValueForHorizontalAlignment = bool.TryParse(ConfigurationManager.AppSettings["alignHorizontally"], out bool alignHorizontally);
+bool gotDefaultValueForVerticalAlignment = bool.TryParse(ConfigurationManager.AppSettings["alignVertically"], out bool alignVertically);
 
-bool gotDefaultValueForHorizontalAlignment = bool.TryParse(ConfigurationManager.AppSettings["alignHorizontally"], out alignHorizontally);
-bool gotDefaultValueForVerticalAlignment = bool.TryParse(ConfigurationManager.AppSettings["alignVertically"], out alignVertically);
-
-if (!gotDefaultValueForHorizontalAlignment || !gotDefaultValueForVerticalAlignment)
-{
-    alignHorizontally = false;
-    alignVertically = false;
-}
-
-ProcessUserInput(out text, ref alignHorizontally, ref alignVertically);
+ProcessUserInput(out string? text, ref alignHorizontally, ref alignVertically);
 decimal speed = SetReadingSpeed();
 
 var speedReader = new SpeedReader(speed, text, alignHorizontally, alignVertically);
 speedReader.SpeedReadText();
-
-static void ConfigureAlignmentSettings(out bool alignHorizontally, out bool alignVertically)
-{
-    string message1 = "Do you wish to align the text horizontally? Type in True for yes and False for no: ";
-    alignHorizontally = NonStringInput<bool>.ReceiveCorrectInputValues(message1, JustReadInput, NonStringInput<bool>.IsParsedCorrectly);
-    ChangeConfiguration("alignHorizontally", alignHorizontally.ToString());
-
-    string message2 = "Do you wish to align the text vertically? Type in True for yes and False for no: ";
-    alignVertically = NonStringInput<bool>.ReceiveCorrectInputValues(message2, JustReadInput, NonStringInput<bool>.IsParsedCorrectly);
-    ChangeConfiguration("alignVertically", alignVertically.ToString());
-}
 
 static void ProcessUserInput(out string? text, ref bool alignHorizontally, ref bool alignVertically)
 {
@@ -66,7 +47,7 @@ static void SelectOption(out TextOptions option)
 
     string[] messages = [message1, options, text, file, align, reset, choice];
 
-    option = NonStringInput<TextOptions>.ReceiveCorrectInputValues(messages, ReadAndCapitalizeInput, NonStringInput<TextOptions>.IsParsedCorrectly); 
+    option = NonStringInput<TextOptions>.ReceiveCorrectInputValues(messages, ReadAndCapitalizeInput, NonStringInput<TextOptions>.IsParsedCorrectly);
 }
 
 static void ProcessOption(ref TextOptions option, out string? text, ref bool alignHorizontally, ref bool alignVertically)
@@ -84,10 +65,7 @@ static void ProcessOption(ref TextOptions option, out string? text, ref bool ali
             ProcessUserInput(out text, ref alignHorizontally, ref alignVertically);
             break;
         case TextOptions.Reset:
-            ChangeConfiguration("alignHorizontally", "false");
-            alignHorizontally = false;
-            ChangeConfiguration("alignVertically", "false");
-            alignVertically = false;
+            ResetAlignmentSettings(out alignHorizontally, out alignVertically);
             ProcessUserInput(out text, ref alignHorizontally, ref alignVertically);
             break;
         default:
@@ -129,13 +107,4 @@ static decimal SetReadingSpeed()
     string message = "Enter the speed you wish to read the text at — in Words Per Minute (WPM) — has to be a positive value: ";
 
     return NonStringInput<decimal>.ReceiveCorrectInputValues(message, JustReadInput, NonStringInput<decimal>.IsPositiveNumber);
-}
-
-static void ChangeConfiguration(string key, string value)
-{
-    Configuration configFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-    KeyValueConfigurationCollection settings = configFile.AppSettings.Settings;
-    settings[key].Value = value;
-    configFile.Save(ConfigurationSaveMode.Modified);
-    ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
 }
