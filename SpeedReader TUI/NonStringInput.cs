@@ -21,7 +21,7 @@ namespace SpeedReaderTextUserInterface
 
                 ParseValueBasedOnType(out bool parsedSuccessfully, out parsedValue, readAndProcessInput, TryParseMethod);
 
-                if (!successCondition(parsedSuccessfully, parsedValue))
+                if (!successCondition(parsedSuccessfully, ref parsedValue))
                     Console.WriteLine(incorrectDataMessage);
                 else
                     break;
