@@ -93,8 +93,9 @@ static string FileUserInput()
 
     // I WANT this to throw an error, if it doesn't find the path, as trying to catch the error and work around it is too difficult and not worth it for me, it's easier to crash the whole program and try again, than to figure out how to solve this issue. 
     #pragma warning disable CS8604 // Possible null reference argument. Disabled becaused FileExists also checks if the string is null and returns false if it is, so it is (or very likely should be) impossible to get through the do-while loop with a null value.
-    using (StreamReader reader = new(path))
+    using (StreamReader reader = new(path, detectEncodingFromByteOrderMarks: true))
     {
+        Console.OutputEncoding = reader.CurrentEncoding; // Sets the encoding to the console, otherwise the text will not display special characters of different languages.
         text = reader.ReadToEnd();
     }
     #pragma warning restore CS8604 // Possible null reference argument.
