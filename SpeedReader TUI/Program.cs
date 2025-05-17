@@ -6,6 +6,10 @@ using static SpeedReaderTextUserInterface.Input;
 
 Console.Title = "Speed reader";
 
+// This fixes the problems with displaying non-English characters, at least for Czech. 
+Console.InputEncoding = System.Text.Encoding.Unicode;
+Console.OutputEncoding = System.Text.Encoding.Unicode;
+
 /* Tests:
 
 //Enum.TryParse(typeof(TextOptions), "Text", out object? option);
