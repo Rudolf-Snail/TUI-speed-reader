@@ -35,6 +35,11 @@
             return ToCapital(JustReadInput());
         }
 
+        public static string? ReadAndCapitalizeInputAndPreserveCase()
+        {
+            return ToCapital(JustReadInput(), false);
+        }
+
         // Enums
         public enum TextOptions
         {
