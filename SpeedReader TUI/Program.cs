@@ -32,6 +32,9 @@ decimal speed = SetReadingSpeed();
 var speedReader = new SpeedReader(speed, text, alignHorizontally, alignVertically);
 speedReader.SpeedReadText();
 
+// TODO: Refactor ConfigurationManager methods
+bool GetAlignmentConfigurationValueOrDefaultValue(string settingName) => bool.TryParse(ConfigurationManager.AppSettings[settingName], out bool result) ? result : default;
+
 SpeedOptions GetSpeedOptionConfigurationValueOrDefaultValue(string settingName) => Enum.TryParse(ConfigurationManager.AppSettings[settingName], out SpeedOptions result) ? result : default;
 
 static void ProcessUserInput(out string? text, ref SpeedOptions speedOption, ref bool alignHorizontally, ref bool alignVertically)
