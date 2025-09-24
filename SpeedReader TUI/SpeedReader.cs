@@ -13,12 +13,15 @@ namespace SpeedReaderTextUserInterface
         private bool alignVertically;
 
         // Properties
+        public decimal Speed
         {
             get
             {
+                return speed;
             }
             set
             {
+                speed = value;
             }
         }
 
