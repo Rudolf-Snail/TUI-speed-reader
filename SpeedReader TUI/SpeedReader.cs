@@ -131,6 +131,8 @@ namespace SpeedReaderTextUserInterface
 
             string[] words = Text.Split(Array.Empty<string>(), StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 
+            Words = words;
+
             return words;
         }
 
