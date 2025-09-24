@@ -169,6 +169,8 @@ namespace SpeedReaderTextUserInterface
 
         private decimal ConvertSpeedToWordsPerSecond() => Speed;
 
+        private decimal ConvertSpeedToMinutesPerText() => Speed * 60 / Words.Length;
+
         public void SpeedReadText()
         {
             if (Text is null)
