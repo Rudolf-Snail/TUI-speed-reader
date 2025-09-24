@@ -38,20 +38,21 @@ static void ProcessUserInput(out string? text, ref bool alignHorizontally, ref b
     ProcessOption(ref option, out text, ref alignHorizontally, ref alignVertically);
 }
 
-static void SelectOption(out TextOptions option)
+static void SelectOption(out TextOptions textOption)
 {
     string message1 = "How do you wish to enter the text to speedread?\n";
     string options = "Options:\n";
     // TODO: Make this dynamic and not static 
-    string text = "Type in Text, if you wish to read text from the command line.\n";
-    string file = "Type in File, if you wish to read text from a file.\n";
-    string align = "Type in Align, if you wish to change the alignment of the text.\n";
-    string reset = "Type in Reset, if you wish to reset the alignment settings to the default values.\n";
-    string choice = "Type in the name of the option you wish to choose: ";
+    string text = $"Type in Text or {(int)TextOptions.Text}, if you wish to read text from the command line.\n";
+    string file = $"Type in File or {(int)TextOptions.File}, if you wish to read text from a file.\n";
+    string speedOption = $"Type in SpeedOption or {(int)TextOptions.SpeedOption}, if you wish to change the mode the speed the speed is using.\n";
+    string align = $"Type in Align or {(int)TextOptions.Align}, if you wish to change the alignment of the text.\n";
+    string reset = $"Type in Reset or {(int)TextOptions.Reset}, if you wish to reset the alignment settings to the default values.\n";
+    string choice = "Type in the name or number of the option you wish to choose: ";
 
-    string[] messages = [message1, options, text, file, align, reset, choice];
+    string[] messages = [message1, options, text, file, speedOption, align, reset, choice];
 
-    option = NonStringInput<TextOptions>.ReceiveCorrectInputValues(messages, ReadAndCapitalizeInput, NonStringInput<TextOptions>.IsParsedCorrectly);
+    textOption = NonStringInput<TextOptions>.ReceiveCorrectInputValues(messages, ReadAndCapitalizeInputAndPreserveCase, NonStringInput<TextOptions>.IsParsedCorrectly);
 }
 
 static void ProcessOption(ref TextOptions option, ref SpeedOptions speedOption, out string? text, ref bool alignHorizontally, ref bool alignVertically)
