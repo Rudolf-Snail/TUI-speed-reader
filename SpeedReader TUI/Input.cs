@@ -49,5 +49,13 @@
             Align,
             Reset
         }
+
+        public enum SpeedOptions
+        {
+            WordsPerSecond,
+            WordsPerMinute,
+            SecondsPerText,
+            MinutesPerText
+        }
     }
 }
