@@ -165,6 +165,8 @@ namespace SpeedReaderTextUserInterface
             }
         }
 
+        private decimal ConvertSpeedToWordsPerMinute() => 60 / Speed;
+
         public void SpeedReadText()
         {
             if (Text is null)
