@@ -5,6 +5,7 @@ namespace SpeedReaderTextUserInterface
     internal class SpeedReader
     {
         // Fields
+        private decimal speed = 0;
         private string? text;
         private string? currentWord;
 
