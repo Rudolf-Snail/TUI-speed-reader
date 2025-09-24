@@ -188,6 +188,8 @@ namespace SpeedReaderTextUserInterface
             SpeedReadWords(words, millisecondsPerWord, wordProcessor);
         }
 
+        private ProcessWord ProcessWordAlignment()
+        {
             ProcessWord wordProcessor;
 
             if (!AlignHorizontally && !AlignVertically)
@@ -198,8 +200,7 @@ namespace SpeedReaderTextUserInterface
                 wordProcessor = AlignWordVertically;
             else
                 wordProcessor = CenterWord;
-
-            SpeedReadWords(words, millisecondsPerWord, wordProcessor);
+            return wordProcessor;
         }
 
         private void SpeedReadWords(string[] words, decimal millisecondsPerWord, ProcessWord wordProcessor)
