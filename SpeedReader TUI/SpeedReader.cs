@@ -12,15 +12,12 @@ namespace SpeedReaderTextUserInterface
         private bool alignVertically;
 
         // Properties
-        public decimal WordsPerMinute
         {
             get
             {
-                return wordsPerMinute;
             }
             set
             {
-                wordsPerMinute = value;
             }
         }
 
