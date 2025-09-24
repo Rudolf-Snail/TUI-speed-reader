@@ -65,6 +65,18 @@ namespace SpeedReaderTextUserInterface
             }
         }
 
+        public string[] Words
+        {
+            get
+            {
+                return words;
+            }
+            set
+            {
+                words = value;
+            }
+        }
+
         public string? CurrentWord
         {
             get
