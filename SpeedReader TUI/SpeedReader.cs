@@ -26,6 +26,18 @@ namespace SpeedReaderTextUserInterface
             }
         }
 
+        public SpeedOptions SpeedOption
+        {
+            get
+            {
+                return speedOption;
+            }
+            set
+            {
+                speedOption = value;
+            }
+        }
+
         public string? Text
         {
             get
