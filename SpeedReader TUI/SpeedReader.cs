@@ -114,9 +114,10 @@ namespace SpeedReaderTextUserInterface
         }
 
         // Constructors
-        public SpeedReader(decimal wordsPerMinute, string? text = null, bool alignHorizontally = false, bool alignVertically = false)
+        public SpeedReader(decimal speed, SpeedOptions speedOption, string? text = null, bool alignHorizontally = false, bool alignVertically = false)
         {
-            WordsPerMinute = wordsPerMinute;
+            Speed = speed;
+            SpeedOption = speedOption;
             Text = text;
             AlignHorizontally = alignHorizontally;
             AlignVertically = alignVertically;
