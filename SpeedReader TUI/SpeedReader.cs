@@ -10,6 +10,7 @@ namespace SpeedReaderTextUserInterface
         private string? text;
 
         private decimal secondsPerWord = 0;
+        private string[] words = [];
         private string? currentWord;
 
         private bool alignHorizontally;
