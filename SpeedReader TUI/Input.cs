@@ -45,6 +45,7 @@
         {
             Text,
             File,
+            SpeedOption,
             Align,
             Reset
         }
