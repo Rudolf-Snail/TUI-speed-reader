@@ -107,9 +107,9 @@ static string FileUserInput()
     return text;
 }
 
-static decimal SetReadingSpeed()
+static decimal ProcessSpeed(SpeedOptions speedOption)
 {
-    string message = "Enter the speed you wish to read the text at — in Words Per Minute (WPM) — has to be a positive value: ";
+    string message = $"Enter the speed you wish to read the text at — the current speed option is {speedOption} — the number has to be a positive value: ";
 
     return NonStringInput<decimal>.ReceiveCorrectInputValues(message, JustReadInput, NonStringInput<decimal>.IsPositiveNumber);
 }
