@@ -3,14 +3,16 @@
     internal static class Input
     {
         // Methods
-        public static string? ToCapital(string? text)
+        public static string? ToCapital(string? text, bool convertRestOfTextToLowerCase = true)
         {
             if (string.IsNullOrEmpty(text))
                 return text;
             else if (text.Length == 1)
                 return text.ToUpper();
-            else
+            else if (convertRestOfTextToLowerCase)
                 return text[..1].ToUpper() + text[1..].ToLower();
+            else
+                return text[..1].ToUpper() + text[1..];
         }
 
         // Delegates
