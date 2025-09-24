@@ -54,7 +54,7 @@ static void SelectOption(out TextOptions option)
     option = NonStringInput<TextOptions>.ReceiveCorrectInputValues(messages, ReadAndCapitalizeInput, NonStringInput<TextOptions>.IsParsedCorrectly);
 }
 
-static void ProcessOption(ref TextOptions option, out string? text, ref bool alignHorizontally, ref bool alignVertically)
+static void ProcessOption(ref TextOptions option, ref SpeedOptions speedOption, out string? text, ref bool alignHorizontally, ref bool alignVertically)
 {
     switch (option)
     {
@@ -64,13 +64,17 @@ static void ProcessOption(ref TextOptions option, out string? text, ref bool ali
         case TextOptions.File:
             text = FileUserInput();
             break;
+        case TextOptions.SpeedOption:
+            ConfigureSpeedOptionSettings(ref speedOption);
+            ProcessUserInput(out text, ref speedOption, ref alignHorizontally, ref alignVertically);
+            break;
         case TextOptions.Align:
-            ConfigureAlignmentSettings(out alignHorizontally, out alignVertically);
-            ProcessUserInput(out text, ref alignHorizontally, ref alignVertically);
+            ConfigureAlignmentSettings(ref alignHorizontally, ref alignVertically);
+            ProcessUserInput(out text, ref speedOption, ref alignHorizontally, ref alignVertically);
             break;
         case TextOptions.Reset:
             ResetAlignmentSettings(out alignHorizontally, out alignVertically);
-            ProcessUserInput(out text, ref alignHorizontally, ref alignVertically);
+            ProcessUserInput(out text, ref speedOption, ref alignHorizontally, ref alignVertically);
             break;
         default:
             throw new ArgumentException($"The specified option — {option} — is not valid."); // Should not happen, but it's handled by throwing an error just in case.
