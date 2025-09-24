@@ -58,8 +58,8 @@ namespace SpeedReaderTextUserInterface
             return TryParseMethod;
         }
 
-        private static void ParseValueBasedOnType(out bool parsedSuccessfully, out T parsedValue,
-                                                  Input.ReadAndProcessInput readAndProcessInput, System.Reflection.MethodInfo TryParseMethod)
+        public static void ParseValueBasedOnType(out bool parsedSuccessfully, out T parsedValue,
+                                                 ReadAndProcessInput readAndProcessInput, System.Reflection.MethodInfo TryParseMethod)
         {
             object?[] parameters;
             int parsedValueIndex;
