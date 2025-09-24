@@ -8,6 +8,8 @@ namespace SpeedReaderTextUserInterface
         private decimal speed = 0;
         private SpeedOptions speedOption;
         private string? text;
+
+        private decimal secondsPerWord = 0;
         private string? currentWord;
 
         private bool alignHorizontally;
