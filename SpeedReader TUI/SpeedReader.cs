@@ -1,4 +1,6 @@
-﻿namespace SpeedReaderTextUserInterface
+﻿using static SpeedReaderTextUserInterface.Input;
+
+namespace SpeedReaderTextUserInterface
 {
     internal class SpeedReader
     {
