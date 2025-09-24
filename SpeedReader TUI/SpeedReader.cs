@@ -215,13 +215,13 @@ namespace SpeedReaderTextUserInterface
                 CurrentWord = word;
                 Console.WriteLine(wordProcessor(word, width, height));
 
-                Task.Delay(( int ) millisecondsPerWord).Wait();
+                Task.Delay((int)millisecondsPerWord).Wait();
             }
         }
 
         public static string PadVertically(int height)
         {
-            return String.Concat(Enumerable.Repeat("\n", height / 2));
+            return string.Concat(Enumerable.Repeat("\n", height / 2));
         }
 
         public static string PadHorizontally(string word, int width)
