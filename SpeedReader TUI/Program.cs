@@ -23,13 +23,15 @@ Console.OutputEncoding = System.Text.Encoding.Unicode;
 
 */
 
-bool gotDefaultValueForHorizontalAlignment = bool.TryParse(ConfigurationManager.AppSettings["alignHorizontally"], out bool alignHorizontally);
-bool gotDefaultValueForVerticalAlignment = bool.TryParse(ConfigurationManager.AppSettings["alignVertically"], out bool alignVertically);
+bool alignHorizontally = GetAlignmentConfigurationValueOrDefaultValue("alignHorizontally");
+bool alignVertically = GetAlignmentConfigurationValueOrDefaultValue("alignVertically");
 
-ProcessUserInput(out string? text, ref alignHorizontally, ref alignVertically);
-decimal speed = SetReadingSpeed();
+SpeedOptions speedOption = GetSpeedOptionConfigurationValueOrDefaultValue("speedOption");
 
-var speedReader = new SpeedReader(speed, text, alignHorizontally, alignVertically);
+ProcessUserInput(out string? text, ref speedOption, ref alignHorizontally, ref alignVertically);
+decimal speed = ProcessSpeed(speedOption);
+
+var speedReader = new SpeedReader(speed, speedOption, text, alignHorizontally, alignVertically);
 speedReader.SpeedReadText();
 
 // TODO: Refactor ConfigurationManager methods
