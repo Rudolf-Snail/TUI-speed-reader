@@ -32,10 +32,10 @@ decimal speed = SetReadingSpeed();
 var speedReader = new SpeedReader(speed, text, alignHorizontally, alignVertically);
 speedReader.SpeedReadText();
 
-static void ProcessUserInput(out string? text, ref bool alignHorizontally, ref bool alignVertically)
+static void ProcessUserInput(out string? text, ref SpeedOptions speedOption, ref bool alignHorizontally, ref bool alignVertically)
 {
-    SelectOption(out TextOptions option);
-    ProcessOption(ref option, out text, ref alignHorizontally, ref alignVertically);
+    SelectOption(out TextOptions textOption);
+    ProcessOption(ref textOption, ref speedOption, out text, ref alignHorizontally, ref alignVertically);
 }
 
 static void SelectOption(out TextOptions textOption)
