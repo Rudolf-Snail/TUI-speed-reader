@@ -30,7 +30,7 @@
             return input?.Trim();
         }
 
-        public static string? ReadAndCapitalizeInput()
+        public static string? ReadAndCapitalizeInputAndConvertToLowerCase()
         {
             return ToCapital(JustReadInput());
         }
