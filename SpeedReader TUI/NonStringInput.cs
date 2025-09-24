@@ -8,12 +8,8 @@ namespace SpeedReaderTextUserInterface
         public static T ReceiveCorrectInputValues(string messageToWriteToConsole, ReadAndProcessInput readAndProcessInput,
                                                   SuccessCondition successCondition, string incorrectDataMessage = "This option is not correct, please try again.")
         {
-            System.Reflection.MethodInfo? TryParseMethod = GetTryParseMethodBasedOnType();
-
-            if (TryParseMethod == null)
-                throw new MissingMethodException("The generic struct type you used for the Input class does not have a TryParse method.");
-
             T parsedValue;
+            System.Reflection.MethodInfo? TryParseMethod = GetTryParseMethodBasedOnType("The generic struct type you used for the Input class does not have a TryParse method.");
 
             while (true)
             {
@@ -30,6 +26,16 @@ namespace SpeedReaderTextUserInterface
             return parsedValue;
         }
 
+        private static System.Reflection.MethodInfo GetTryParseMethodBasedOnType(string message)
+        {
+            System.Reflection.MethodInfo? TryParseMethod = TryToGetTryParseMethodBasedOnType();
+
+            if (TryParseMethod == null)
+                throw new MissingMethodException(message);
+
+            return TryParseMethod;
+        }
+
         public static T ReceiveCorrectInputValues(string[] messageToWriteToConsole, ReadAndProcessInput readAndProcessInput,
                                                   SuccessCondition successCondition, string incorrectDataMessage = "This option is not correct, please try again.")
         {
@@ -38,7 +44,7 @@ namespace SpeedReaderTextUserInterface
             return ReceiveCorrectInputValues(message, readAndProcessInput, successCondition, incorrectDataMessage);
         }
 
-        private static System.Reflection.MethodInfo? GetTryParseMethodBasedOnType()
+        private static System.Reflection.MethodInfo? TryToGetTryParseMethodBasedOnType()
         {
             System.Reflection.MethodInfo? TryParseMethod;
 
