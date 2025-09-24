@@ -16,6 +16,18 @@ namespace SpeedReaderTextUserInterface
         private bool alignVertically;
 
         // Properties
+        public decimal SecondsPerWord
+        {
+            get
+            {
+                return secondsPerWord;
+            }
+            set
+            {
+                secondsPerWord = value;
+            }
+        }
+
         public decimal Speed
         {
             get
