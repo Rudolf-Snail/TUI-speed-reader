@@ -144,6 +144,27 @@ namespace SpeedReaderTextUserInterface
             return millisecondsPerWord;
         }
 
+        public void ProcessSpeedOption()
+        {
+            switch (SpeedOption)
+            {
+                case SpeedOptions.WordsPerMinute:
+                    SecondsPerWord = ConvertSpeedToWordsPerMinute();
+                    break;
+                case SpeedOptions.WordsPerSecond:
+                    SecondsPerWord = ConvertSpeedToWordsPerSecond();
+                    break;
+                case SpeedOptions.MinutesPerText:
+                    SecondsPerWord = ConvertSpeedToMinutesPerText();
+                    break;
+                case SpeedOptions.SecondsPerText:
+                    SecondsPerWord = ConvertSpeedToSecondsPerText();
+                    break;
+                default:
+                    throw new ArgumentException($"The specified option — {SpeedOption} — is not valid."); // Should not happen, but it's handled by throwing an error just in case.
+            }
+        }
+
         public void SpeedReadText()
         {
             if (Text is null)
