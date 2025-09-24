@@ -6,6 +6,7 @@ namespace SpeedReaderTextUserInterface
     {
         // Fields
         private decimal speed = 0;
+        private SpeedOptions speedOption;
         private string? text;
         private string? currentWord;
 
