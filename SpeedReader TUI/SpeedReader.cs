@@ -179,7 +179,14 @@ namespace SpeedReaderTextUserInterface
                 return;
 
             string[] words = ConvertTextToWords();
+
+            ProcessSpeedOption();
             decimal millisecondsPerWord = MillisecondsPerWord();
+
+            ProcessWord wordProcessor = ProcessWordAlignment();
+
+            SpeedReadWords(words, millisecondsPerWord, wordProcessor);
+        }
 
             ProcessWord wordProcessor;
 
