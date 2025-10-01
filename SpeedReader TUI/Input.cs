@@ -47,7 +47,8 @@
             File,
             SpeedOption,
             Align,
-            Reset
+            Reset,
+            Exit
         }
 
         public enum SpeedOptions

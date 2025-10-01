@@ -44,6 +44,18 @@ namespace SpeedReaderTextUserInterface
             ReloadSettings(configFile);
         }
 
+        public static void ConfigureExitSettings(ref bool exitAfterSpeedReading)
+        {
+            ConfigurationFileAppSettings(out Configuration configFile, out KeyValueConfigurationCollection settings);
+
+            string message = $"Do you wish to exit after speed reading through text? Type in True for yes and False for no — current vallue is {exitAfterSpeedReading}: ";
+            exitAfterSpeedReading = NonStringInput<bool>.ReceiveCorrectInputValues(message, JustReadInput, NonStringInput<bool>.IsParsedCorrectly);
+            ChangeSetting("exit", exitAfterSpeedReading.ToString(), settings);
+
+            SaveSettings(configFile);
+            ReloadSettings(configFile);
+        }
+
         public static void ResetAlignmentSettings(out bool alignHorizontally, out bool alignVertically)
         {
             ConfigurationFileAppSettings(out Configuration configFile, out KeyValueConfigurationCollection settings);
