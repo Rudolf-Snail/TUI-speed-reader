@@ -1,6 +1,6 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using SpeedReaderTextUserInterface;
 using System.Configuration;
+using SpeedReaderTextUserInterface;
 using static SpeedReaderTextUserInterface.AppSettingsConfigurationFile;
 using static SpeedReaderTextUserInterface.Input;
 
@@ -26,15 +26,29 @@ Console.OutputEncoding = System.Text.Encoding.Unicode;
 bool alignHorizontally = GetAlignmentConfigurationValueOrDefaultValue("alignHorizontally");
 bool alignVertically = GetAlignmentConfigurationValueOrDefaultValue("alignVertically");
 
-SpeedOptions speedOption = GetSpeedOptionConfigurationValueOrDefaultValue("speedOption");
+SpeedOptions speedOption = GetSpeedOptionConfigurationValueOrDefaultValue();
 
+bool exitAfterSpeedReading = GetExitAfterSpeedReadingConfigurationValueOrDefaultValue();
 
+TextOptions textOption;
 
+string? text = "";
 
+while (true)
 {
+    ProcessUserInput(ref text, out textOption, ref speedOption, ref alignHorizontally, ref alignVertically, ref exitAfterSpeedReading);
 
+    if (textOption == TextOptions.Exit)
     {
+        break;
     }
+    else if (textOption == TextOptions.Text || textOption == TextOptions.File)
     {
+        decimal speed = ProcessSpeed(speedOption);
+        var speedReader = new SpeedReader(speed, speedOption, text, alignHorizontally, alignVertically);
+        speedReader.SpeedReadText();
 
+        if (exitAfterSpeedReading)
+            break;
+    }
 }
