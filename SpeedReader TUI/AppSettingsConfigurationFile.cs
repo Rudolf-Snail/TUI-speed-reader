@@ -95,5 +95,12 @@ namespace SpeedReaderTextUserInterface
         {
             ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
         }
+
+        // TODO: Refactor ConfigurationManager methods
+        public static bool GetAlignmentConfigurationValueOrDefaultValue(string settingName) => bool.TryParse(ConfigurationManager.AppSettings[settingName], out bool result) ? result : default;
+
+        public static SpeedOptions GetSpeedOptionConfigurationValueOrDefaultValue() => Enum.TryParse(ConfigurationManager.AppSettings["speedOption"], out SpeedOptions result) ? result : default;
+
+        public static bool GetExitAfterSpeedReadingConfigurationValueOrDefaultValue() => bool.TryParse(ConfigurationManager.AppSettings["exitAfterSpeedReading"], out bool result) ? result : default;
     }
 }
