@@ -139,7 +139,7 @@ namespace SpeedReaderTextUserInterface
         public decimal MillisecondsPerWord()
         {
             decimal millisecondsPerSecond = 1000;
-            decimal millisecondsPerWord = millisecondsPerSecond / SecondsPerWord;
+            decimal millisecondsPerWord = SecondsPerWord * millisecondsPerSecond;
 
             return millisecondsPerWord;
         }
