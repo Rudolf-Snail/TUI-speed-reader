@@ -9,6 +9,8 @@ Currently this program supports the following features:
 * Setting reading speed
 * Setting the speed option for reading: words per second/minute, text per second/minute
 * Aligning the position of text to center in horizontal and vertical axis and their combinations
+* Exiting the program after speed reading or keeping the program running
+* Exiting from the program via the program
 
 ## How to use
 
