@@ -140,7 +140,7 @@ namespace SpeedReaderTextUserInterface
             Text,
             File,
             SpeedOption,
-            Align,
+            AlignOption,
             Reset,
             Exit
         }
