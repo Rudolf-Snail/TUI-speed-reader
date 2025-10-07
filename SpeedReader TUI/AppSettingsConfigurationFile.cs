@@ -56,7 +56,7 @@ namespace SpeedReaderTextUserInterface
             ReloadSettings(configFile);
         }
 
-        public static void ResetAlignmentSettings(out bool alignHorizontally, out bool alignVertically)
+        public static void ResetOptionSettings(out bool alignHorizontally, out bool alignVertically, out SpeedOptions speedOption, out bool exitAfterSpeedReading)
         {
             ConfigurationFileAppSettings(out Configuration configFile, out KeyValueConfigurationCollection settings);
 
@@ -64,6 +64,12 @@ namespace SpeedReaderTextUserInterface
             alignHorizontally = false;
             ChangeSetting("alignVertically", "false", settings);
             alignVertically = false;
+
+            ChangeSetting("speedOption", SpeedOptions.WordsPerSecond.ToString(), settings);
+            speedOption = SpeedOptions.WordsPerSecond;
+
+            ChangeSetting("exitAfterSpeedReading", "false", settings);
+            exitAfterSpeedReading = false;
 
             SaveSettings(configFile);
             ReloadSettings(configFile);
