@@ -1,8 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using System.Configuration;
 using SpeedReaderTextUserInterface;
-using static SpeedReaderTextUserInterface.AppSettingsConfigurationFile;
-using static SpeedReaderTextUserInterface.Input;
 
 Console.Title = "Speed reader";
 
@@ -22,33 +19,5 @@ Console.OutputEncoding = System.Text.Encoding.Unicode;
 //NonStringInput<decimal>.GetCorrectInputValues("Please enter a positive number: ", "That is not correct, please try again.", Input.JustReadInput, successCondition);
 
 */
-
-bool alignHorizontally = GetAlignmentConfigurationValueOrDefaultValue("alignHorizontally");
-bool alignVertically = GetAlignmentConfigurationValueOrDefaultValue("alignVertically");
-
-SpeedOptions speedOption = GetSpeedOptionConfigurationValueOrDefaultValue();
-
-bool exitAfterSpeedReading = GetExitAfterSpeedReadingConfigurationValueOrDefaultValue();
-
-TextOptions textOption;
-
-string? text = "";
-
-while (true)
-{
-    ProcessUserInput(ref text, out textOption, ref speedOption, ref alignHorizontally, ref alignVertically, ref exitAfterSpeedReading);
-
-    if (textOption == TextOptions.Exit)
-    {
-        break;
-    }
-    else if (textOption == TextOptions.Text || textOption == TextOptions.File)
-    {
-        decimal speed = ProcessSpeed(speedOption);
-        var speedReader = new SpeedReader(speed, speedOption, text, alignHorizontally, alignVertically);
-        speedReader.SpeedReadText();
-
-        if (exitAfterSpeedReading)
-            break;
-    }
-}
+SpeedReader speedReader = new();
+speedReader.ReadEvaluateProcessLoop();
