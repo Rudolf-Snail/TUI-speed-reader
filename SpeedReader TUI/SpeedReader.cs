@@ -185,9 +185,9 @@ namespace SpeedReaderTextUserInterface
             // TODO: Make this dynamic and not static 
             string text = $"Type in {TextOptions.Text} or {(int)TextOptions.Text}, if you wish to read text from the command line.\n";
             string file = $"Type in {TextOptions.File} or {(int)TextOptions.File}, if you wish to read text from a file.\n";
-            string speedOption = $"Type in {TextOptions.SpeedOption} or {(int)TextOptions.SpeedOption}, if you wish to change the mode the speed the speed is using.\n";
-            string alignOption = $"Type in {TextOptions.AlignOption} or {(int)TextOptions.AlignOption}, if you wish to change the alignment of the text.\n";
-            string exitOption = $"Type in {TextOptions.ExitOption} or {(int)TextOptions.ExitOption}, if you wish to exit this program after speed reading.\n";
+            string speedOption = $"Type in {TextOptions.SpeedOption} or {(int)TextOptions.SpeedOption}, if you wish to change the mode the speed the speed is using — the currently used mode is {SpeedOption}.\n";
+            string alignOption = $"Type in {TextOptions.AlignOption} or {(int)TextOptions.AlignOption}, if you wish to change the alignment of the text — the currently used values are AlignHorizontally: {AlignHorizontally}, AlignVertically {AlignVertically}.\n";
+            string exitOption = $"Type in {TextOptions.ExitOption} or {(int)TextOptions.ExitOption}, if you wish to exit this program after speed reading — the currently used value is {ExitAfterSpeedReading}.\n";
             string reset = $"Type in {TextOptions.Reset} or {(int)TextOptions.Reset}, if you wish to reset the alignment settings to the default values.\n";
             string exit = $"Type in {TextOptions.Exit} or {(int)TextOptions.Exit}, if you wish to exit this program.\n";
             string choice = "Type in the name or number of the option you wish to choose: ";
