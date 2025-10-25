@@ -14,8 +14,9 @@ Currently this program supports the following features:
 
 ## How to use
 
+* For best chances of success use Windows 11 — it's the only operating system I've tested it on.
+ If you don't have it installed, install .NET 9.0 from [this page](https://dotnet.microsoft.com/en-us/download).
 * Download the Speed.Reader.text.user.interface.zip file from the release you wish to use — all the available releases are listed [here](https://github.com/Rudolf-Snail/TUI-speed-reader/releases).
-* If you don't have it installed, install .NET 8.0 from [this page](https://dotnet.microsoft.com/en-us/download)
 * Extract its contents into a folder you want; the program is portable and doesn't support or need installation.
 * Run the SpeedReader TUI.exe file.
 * Follow instructions.
