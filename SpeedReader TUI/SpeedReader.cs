@@ -351,8 +351,6 @@ namespace SpeedReaderTextUserInterface
                 Task.Delay((int)millisecondsPerWord).Wait();
             }
 
-            Task.Delay((int)millisecondsPerWord).Wait();
-
             Console.Clear();
         }
 
