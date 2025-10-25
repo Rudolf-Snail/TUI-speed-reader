@@ -1,6 +1,4 @@
-﻿using static SpeedReaderTextUserInterface.AppSettingsConfigurationFile;
-
-namespace SpeedReaderTextUserInterface
+﻿namespace SpeedReaderTextUserInterface
 {
     internal static class Input
     {
@@ -40,26 +38,6 @@ namespace SpeedReaderTextUserInterface
         public static string? ReadAndCapitalizeInputAndPreserveCase()
         {
             return ToCapital(JustReadInput(), false);
-        }
-
-        // Enums
-        public enum TextOptions
-        {
-            Text,
-            File,
-            SpeedOption,
-            AlignOption,
-            ExitOption,
-            Reset,
-            Exit
-        }
-
-        public enum SpeedOptions
-        {
-            WordsPerSecond,
-            WordsPerMinute,
-            SecondsPerText,
-            MinutesPerText
         }
     }
 }
