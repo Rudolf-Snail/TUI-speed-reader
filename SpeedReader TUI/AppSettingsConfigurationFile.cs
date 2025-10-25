@@ -1,12 +1,11 @@
 ﻿using System.Configuration;
 using static SpeedReaderTextUserInterface.Input;
 
-
 namespace SpeedReaderTextUserInterface
 {
     internal static class AppSettingsConfigurationFile
     {
-        public static void ConfigureSpeedOptionSettings(ref SpeedOptions speedOption)
+        public static void ConfigureSpeedOptionSettings(SpeedReader speedReader)
         {
             ConfigurationFileAppSettings(out Configuration configFile, out KeyValueConfigurationCollection settings);
 
@@ -21,55 +20,55 @@ namespace SpeedReaderTextUserInterface
 
             string[] messages = [message1, options, wordsPerSecond, wordsPerMinute, secondsPerText, minutesPerText, choice];
 
-            speedOption = NonStringInput<SpeedOptions>.ReceiveCorrectInputValues(messages, ReadAndCapitalizeInputAndPreserveCase, NonStringInput<SpeedOptions>.IsParsedCorrectly);
-            ChangeSetting("speedOption", speedOption.ToString(), settings);
+            speedReader.CurrentSpeedOption = NonStringInput<SpeedOptions>.ReceiveCorrectInputValues(messages, ReadAndCapitalizeInputAndPreserveCase, NonStringInput<SpeedOptions>.IsParsedCorrectly);
+            ChangeSetting("speedOption", speedReader.CurrentSpeedOption.ToString(), settings);
 
             SaveSettings(configFile);
             ReloadSettings(configFile);
         }
 
-        public static void ConfigureAlignmentSettings(ref bool alignHorizontally, ref bool alignVertically)
+        public static void ConfigureAlignmentSettings(SpeedReader speedReader)
         {
             ConfigurationFileAppSettings(out Configuration configFile, out KeyValueConfigurationCollection settings);
 
-            string message1 = $"Do you wish to align the text horizontally? Type in True for yes and False for no — current value is {alignHorizontally}: ";
-            alignHorizontally = NonStringInput<bool>.ReceiveCorrectInputValues(message1, JustReadInput, NonStringInput<bool>.IsParsedCorrectly);
-            ChangeSetting("alignHorizontally", alignHorizontally.ToString(), settings);
+            string message1 = $"Do you wish to align the text horizontally? Type in True for yes and False for no — current value is {speedReader.AlignHorizontally}: ";
+            speedReader.AlignHorizontally = NonStringInput<bool>.ReceiveCorrectInputValues(message1, JustReadInput, NonStringInput<bool>.IsParsedCorrectly);
+            ChangeSetting("alignHorizontally", speedReader.AlignHorizontally.ToString(), settings);
 
-            string message2 = $"Do you wish to align the text vertically? Type in True for yes and False for no — current value is {alignVertically}: ";
-            alignVertically = NonStringInput<bool>.ReceiveCorrectInputValues(message2, JustReadInput, NonStringInput<bool>.IsParsedCorrectly);
-            ChangeSetting("alignVertically", alignVertically.ToString(), settings);
+            string message2 = $"Do you wish to align the text vertically? Type in True for yes and False for no — current value is {speedReader.AlignVertically}: ";
+            speedReader.AlignVertically = NonStringInput<bool>.ReceiveCorrectInputValues(message2, JustReadInput, NonStringInput<bool>.IsParsedCorrectly);
+            ChangeSetting("alignVertically", speedReader.AlignVertically.ToString(), settings);
 
             SaveSettings(configFile);
             ReloadSettings(configFile);
         }
 
-        public static void ConfigureExitSettings(ref bool exitAfterSpeedReading)
+        public static void ConfigureExitSettings(SpeedReader speedReader)
         {
             ConfigurationFileAppSettings(out Configuration configFile, out KeyValueConfigurationCollection settings);
 
-            string message = $"Do you wish to exit after speed reading through text? Type in True for yes and False for no — current value is {exitAfterSpeedReading}: ";
-            exitAfterSpeedReading = NonStringInput<bool>.ReceiveCorrectInputValues(message, JustReadInput, NonStringInput<bool>.IsParsedCorrectly);
-            ChangeSetting("exitAfterSpeedReading", exitAfterSpeedReading.ToString(), settings);
+            string message = $"Do you wish to exit after speed reading through text? Type in True for yes and False for no — current value is {speedReader.ExitAfterSpeedReading}: ";
+            speedReader.ExitAfterSpeedReading = NonStringInput<bool>.ReceiveCorrectInputValues(message, JustReadInput, NonStringInput<bool>.IsParsedCorrectly);
+            ChangeSetting("exitAfterSpeedReading", speedReader.ExitAfterSpeedReading.ToString(), settings);
 
             SaveSettings(configFile);
             ReloadSettings(configFile);
         }
 
-        public static void ResetOptionSettings(out bool alignHorizontally, out bool alignVertically, out SpeedOptions speedOption, out bool exitAfterSpeedReading)
+        public static void ResetOptionSettings(SpeedReader speedReader)
         {
             ConfigurationFileAppSettings(out Configuration configFile, out KeyValueConfigurationCollection settings);
 
             ChangeSetting("alignVertically", "false", settings);
-            alignHorizontally = false;
+            speedReader.AlignHorizontally = false;
             ChangeSetting("alignVertically", "false", settings);
-            alignVertically = false;
+            speedReader.AlignVertically = false;
 
             ChangeSetting("speedOption", SpeedOptions.WordsPerSecond.ToString(), settings);
-            speedOption = SpeedOptions.WordsPerSecond;
+            speedReader.CurrentSpeedOption = SpeedOptions.WordsPerSecond;
 
             ChangeSetting("exitAfterSpeedReading", "false", settings);
-            exitAfterSpeedReading = false;
+            speedReader.ExitAfterSpeedReading = false;
 
             SaveSettings(configFile);
             ReloadSettings(configFile);
