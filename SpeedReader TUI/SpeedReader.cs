@@ -208,16 +208,16 @@ namespace SpeedReaderTextUserInterface
                     FileUserInput();
                     break;
                 case TextOptions.SpeedOption:
-                    ConfigureSpeedOptionSettings(ref speedOption);
+                    ConfigureSpeedOptionSettings(this);
                     break;
                 case TextOptions.AlignOption:
-                    ConfigureAlignmentSettings(ref alignHorizontally, ref alignVertically);
+                    ConfigureAlignmentSettings(this);
                     break;
                 case TextOptions.ExitOption:
-                    ConfigureExitSettings(ref exitAfterSpeedReading);
+                    ConfigureExitSettings(this);
                     break;
                 case TextOptions.Reset:
-                    ResetOptionSettings(out alignHorizontally, out alignVertically, out speedOption, out exitAfterSpeedReading);
+                    ResetOptionSettings(this);
                     break;
                 case TextOptions.Exit:
                     Console.WriteLine("Goodbye!");
@@ -264,8 +264,6 @@ namespace SpeedReaderTextUserInterface
 
             string[] words = Text.Split(Array.Empty<string>(), StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
 
-            Words = words;
-
             return words;
         }
 
@@ -311,14 +309,14 @@ namespace SpeedReaderTextUserInterface
             if (Text is null)
                 return;
 
-            string[] words = ConvertTextToWords();
+            Words = ConvertTextToWords();
 
             ProcessSpeedOption();
             decimal millisecondsPerWord = MillisecondsPerWord();
 
             ProcessWord wordProcessor = ProcessWordAlignment();
 
-            SpeedReadWords(words, millisecondsPerWord, wordProcessor);
+            SpeedReadWords(millisecondsPerWord, wordProcessor);
         }
 
         private ProcessWord ProcessWordAlignment()
@@ -336,17 +334,17 @@ namespace SpeedReaderTextUserInterface
             return wordProcessor;
         }
 
-        private void SpeedReadWords(string[] words, decimal millisecondsPerWord, ProcessWord wordProcessor)
+        private void SpeedReadWords(decimal millisecondsPerWord, ProcessWord wordProcessor)
         {
             int width = Console.WindowWidth;
             int height = Console.WindowHeight;
 
-            foreach (string word in words)
+            foreach (string word in Words)
             {
                 Console.Clear();
 
                 CurrentWord = word;
-                Console.WriteLine(wordProcessor(word, width, height));
+                Console.WriteLine(wordProcessor(width, height));
 
                 Task.Delay((int)millisecondsPerWord).Wait();
             }
@@ -354,37 +352,31 @@ namespace SpeedReaderTextUserInterface
             Console.Clear();
         }
 
-        public static string PadVertically(int height)
-        {
-            return string.Concat(Enumerable.Repeat("\n", height / 2));
-        }
+        public string PadVertically(int height) => string.Concat(Enumerable.Repeat("\n", height / 2));
 
-        public static string PadHorizontally(string word, int width)
+        public string PadHorizontally(int width)
         {
-            return word.PadLeft(width / 2);
+            if (CurrentWord == null)
+                throw new ArgumentNullException(CurrentWord, "The CurrentWord property contains a null value.");
+
+            return CurrentWord.PadLeft(width / 2);
         }
 
         // Delegates
-        public delegate string ProcessWord(string word, int width, int height);
+        public delegate string ProcessWord(int width, int height);
 
-        public string DoNotAlignWord(string word, int width, int height)
+        public string DoNotAlignWord(int width, int height)
         {
-            return word;
+            if (CurrentWord == null)
+                throw new ArgumentNullException(CurrentWord, "The CurrentWord property contains a null value.");
+
+            return CurrentWord;
         }
 
-        public string AlignWordHorizontally(string word, int width, int height)
-        {
-            return PadHorizontally(word, width);
-        }
+        public string AlignWordHorizontally(int width, int height) => PadHorizontally(width);
 
-        public string AlignWordVertically(string word, int width, int height)
-        {
-            return PadVertically(height) + word;
-        }
+        public string AlignWordVertically(int width, int height) => PadVertically(height) + CurrentWord;
 
-        public string CenterWord(string word, int width, int height)
-        {
-            return PadVertically(height) + PadHorizontally(word, width);
-        }
+        public string CenterWord(int width, int height) => PadVertically(height) + PadHorizontally(width);
     }
 }
