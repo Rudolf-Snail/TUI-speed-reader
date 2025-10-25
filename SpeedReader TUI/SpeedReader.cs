@@ -7,10 +7,10 @@ namespace SpeedReaderTextUserInterface
     {
         // Fields
         private decimal speed = 0;
-        private SpeedOptions speedOption;
+        private SpeedOptions currentSpeedOption;
 
         private string? text;
-        private TextOptions textOption;
+        private TextOptions currentTextOption;
 
         private decimal secondsPerWord = 0;
         private string[] words = [];
@@ -45,15 +45,15 @@ namespace SpeedReaderTextUserInterface
             }
         }
 
-        public SpeedOptions SpeedOption
+        public SpeedOptions CurrentSpeedOption
         {
             get
             {
-                return speedOption;
+                return currentSpeedOption;
             }
             set
             {
-                speedOption = value;
+                currentSpeedOption = value;
             }
         }
 
@@ -129,22 +129,22 @@ namespace SpeedReaderTextUserInterface
             }
         }
 
-        public TextOptions TextOption
+        public TextOptions CurrentTextOption
         {
             get
             {
-                return textOption;
+                return currentTextOption;
             }
             set
             {
-                textOption = value;
+                currentTextOption = value;
             }
         }
 
         // Constructors
         public SpeedReader()
         {
-            SpeedOption = GetSpeedOptionConfigurationValueOrDefaultValue();
+            CurrentSpeedOption = GetSpeedOptionConfigurationValueOrDefaultValue();
             AlignHorizontally = GetAlignmentConfigurationValueOrDefaultValue("alignHorizontally");
             AlignVertically = GetAlignmentConfigurationValueOrDefaultValue("alignVertically");
             ExitAfterSpeedReading = GetExitAfterSpeedReadingConfigurationValueOrDefaultValue();
@@ -157,11 +157,11 @@ namespace SpeedReaderTextUserInterface
             {
                 ProcessUserInput();
 
-                if (TextOption == TextOptions.Exit)
+                if (CurrentTextOption == TextOptions.Exit)
                 {
                     break;
                 }
-                else if (TextOption == TextOptions.Text || TextOption == TextOptions.File)
+                else if (CurrentTextOption == TextOptions.Text || CurrentTextOption == TextOptions.File)
                 {
                     ProcessSpeed();
                     SpeedReadText();
@@ -194,12 +194,13 @@ namespace SpeedReaderTextUserInterface
 
             string[] messages = [message1, options, text, file, speedOption, alignOption, exitOption, reset, exit, choice];
 
-            TextOption = NonStringInput<TextOptions>.ReceiveCorrectInputValues(messages, ReadAndCapitalizeInputAndPreserveCase, NonStringInput<TextOptions>.IsParsedCorrectly);
+
+            CurrentTextOption = NonStringInput<TextOptions>.ReceiveCorrectInputValues(messages, ReadAndCapitalizeInputAndPreserveCase, NonStringInput<TextOptions>.IsParsedCorrectly);
         }
 
         private void ProcessOption()
         {
-            switch (TextOption)
+            switch (CurrentTextOption)
             {
                 case TextOptions.Text:
                     TextUserInput();
@@ -223,7 +224,7 @@ namespace SpeedReaderTextUserInterface
                     Console.WriteLine("Goodbye!");
                     break;
                 default:
-                    throw new ArgumentException($"The specified option — {TextOption} — is not valid."); // Should not happen, but it's handled by throwing an error just in case.
+                    throw new ArgumentException($"The specified option — {CurrentTextOption} — is not valid."); // Should not happen, but it's handled by throwing an error just in case.
             }
         }
 
@@ -252,7 +253,7 @@ namespace SpeedReaderTextUserInterface
 
         public void ProcessSpeed()
         {
-            string message = $"Enter the speed you wish to read the text at — the current speed option is {SpeedOption} — the number has to be a positive value: ";
+            string message = $"Enter the speed you wish to read the text at — the current speed option is {CurrentSpeedOption} — the number has to be a positive value: ";
 
             Speed = NonStringInput<decimal>.ReceiveCorrectInputValues(message, JustReadInput, NonStringInput<decimal>.IsPositiveNumber);
         }
@@ -277,7 +278,7 @@ namespace SpeedReaderTextUserInterface
 
         public void ProcessSpeedOption()
         {
-            switch (SpeedOption)
+            switch (CurrentSpeedOption)
             {
                 case SpeedOptions.WordsPerMinute:
                     SecondsPerWord = ConvertSpeedToWordsPerMinute();
@@ -292,7 +293,7 @@ namespace SpeedReaderTextUserInterface
                     SecondsPerWord = ConvertSpeedToSecondsPerText();
                     break;
                 default:
-                    throw new ArgumentException($"The specified option — {SpeedOption} — is not valid."); // Should not happen, but it's handled by throwing an error just in case.
+                    throw new ArgumentException($"The specified option — {CurrentSpeedOption} — is not valid."); // Should not happen, but it's handled by throwing an error just in case.
             }
         }
 
