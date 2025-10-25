@@ -11,14 +11,10 @@ namespace SpeedReaderTextUserInterface
 
             string message1 = "What speed option do you wish to use?\n";
             string options = "Options:\n";
-            // TODO: Make this dynamic and not static 
-            string wordsPerSecond = $"Type in {SpeedOptions.WordsPerSecond} or {(int)SpeedOptions.WordsPerSecond}, if you wish to set the amount of words per second the speed reader will display.\n";
-            string wordsPerMinute = $"Type in {SpeedOptions.WordsPerMinute} or {(int)SpeedOptions.WordsPerMinute}, if you wish to set the amount of words per minute the speed reader will display.\n";
-            string secondsPerText = $"Type in {SpeedOptions.SecondsPerText} or {(int)SpeedOptions.SecondsPerText}, if you wish to set the the amount of seconds the speed reader will display the text in.\n";
-            string minutesPerText = $"Type in {SpeedOptions.MinutesPerText} or {(int)SpeedOptions.MinutesPerText}, if you wish to set the the amount of minutes the speed reader will display the text in.\n";
-            string choice = $"Type in the name or number of the option you wish to choose — current option is {speedOption}: ";
+            string speedOptionsWithDescriptions = SpeedOption.DescribeAllValues();
+            string choice = $"\nType in the name or number of the option you wish to choose — current option is {speedReader.CurrentSpeedOption}: ";
 
-            string[] messages = [message1, options, wordsPerSecond, wordsPerMinute, secondsPerText, minutesPerText, choice];
+            string[] messages = [message1, options, speedOptionsWithDescriptions, choice];
 
             speedReader.CurrentSpeedOption = NonStringInput<SpeedOptions>.ReceiveCorrectInputValues(messages, ReadAndCapitalizeInputAndPreserveCase, NonStringInput<SpeedOptions>.IsParsedCorrectly);
             ChangeSetting("speedOption", speedReader.CurrentSpeedOption.ToString(), settings);
