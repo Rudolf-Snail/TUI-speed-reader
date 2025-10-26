@@ -1,3 +1,4 @@
+﻿using System.Diagnostics;
 using System.Threading.Tasks;
 using static SpeedReaderTextUserInterface.AppSettingsConfigurationFile;
 using static SpeedReaderTextUserInterface.Input;
@@ -333,14 +334,23 @@ namespace SpeedReaderTextUserInterface
             int width = Console.WindowWidth;
             int height = Console.WindowHeight;
 
+            Stopwatch? timer; 
+
             foreach (string word in Words)
             {
+                timer = Stopwatch.StartNew();
+                
                 Console.Clear();
 
                 CurrentWord = word;
+
                 Console.WriteLine(wordProcessor(width, height));
 
-                await Task.Delay((int)millisecondsPerWord);
+                timer.Stop();
+
+                await Task.Delay(Math.Max((int)millisecondsPerWord - (int)timer.ElapsedMilliseconds, 0));
+
+                timer.Reset();
             }
 
             Console.Clear();
