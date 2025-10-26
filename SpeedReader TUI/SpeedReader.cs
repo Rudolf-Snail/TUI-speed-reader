@@ -1,4 +1,5 @@
-﻿using static SpeedReaderTextUserInterface.AppSettingsConfigurationFile;
+using System.Threading.Tasks;
+using static SpeedReaderTextUserInterface.AppSettingsConfigurationFile;
 using static SpeedReaderTextUserInterface.Input;
 
 namespace SpeedReaderTextUserInterface
@@ -151,7 +152,7 @@ namespace SpeedReaderTextUserInterface
         }
 
         // Methods
-        public void ReadEvaluateProcessLoop()
+        public async Task ReadEvaluateProcessLoop()
         {
             while (true)
             {
@@ -164,7 +165,7 @@ namespace SpeedReaderTextUserInterface
                 else if (CurrentTextOption == TextOptions.Text || CurrentTextOption == TextOptions.File)
                 {
                     ProcessSpeed();
-                    SpeedReadText();
+                    await SpeedReadText();
 
                     if (ExitAfterSpeedReading)
                         break;
@@ -297,7 +298,7 @@ namespace SpeedReaderTextUserInterface
 
         private decimal ConvertSpeedToSecondsPerText() => Speed / Words.Length;
 
-        public void SpeedReadText()
+        public async Task SpeedReadText()
         {
             if (Text is null)
                 return;
@@ -309,7 +310,7 @@ namespace SpeedReaderTextUserInterface
 
             ProcessWord wordProcessor = ProcessWordAlignment();
 
-            SpeedReadWords(millisecondsPerWord, wordProcessor);
+            await SpeedReadWords(millisecondsPerWord, wordProcessor);
         }
 
         private ProcessWord ProcessWordAlignment()
@@ -327,7 +328,7 @@ namespace SpeedReaderTextUserInterface
             return wordProcessor;
         }
 
-        private void SpeedReadWords(decimal millisecondsPerWord, ProcessWord wordProcessor)
+        private async Task SpeedReadWords(decimal millisecondsPerWord, ProcessWord wordProcessor)
         {
             int width = Console.WindowWidth;
             int height = Console.WindowHeight;
@@ -339,7 +340,7 @@ namespace SpeedReaderTextUserInterface
                 CurrentWord = word;
                 Console.WriteLine(wordProcessor(width, height));
 
-                Task.Delay((int)millisecondsPerWord).Wait();
+                await Task.Delay((int)millisecondsPerWord);
             }
 
             Console.Clear();
