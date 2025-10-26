@@ -291,7 +291,7 @@ namespace SpeedReaderTextUserInterface
 
         private decimal ConvertSpeedToWordsPerMinute() => 60 / Speed;
 
-        private decimal ConvertSpeedToWordsPerSecond() => Speed;
+        private decimal ConvertSpeedToWordsPerSecond() => 1 / Speed;
 
         private decimal ConvertSpeedToMinutesPerText() => Speed * 60 / Words.Length;
 
