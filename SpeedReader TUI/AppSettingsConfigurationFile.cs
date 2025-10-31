@@ -129,5 +129,11 @@ namespace SpeedReaderTextUserInterface
         public delegate void SetPropertyAndChangeSetting(SpeedReader speedReader, KeyValueConfigurationCollection settings, string message);
 
         public static bool GetExitAfterSpeedReadingConfigurationValueOrDefaultValue() => bool.TryParse(ConfigurationManager.AppSettings["exitAfterSpeedReading"], out bool result) ? result : default;
+        public static void SetCurrentReadOptionPropertyAndChangeSetting(SpeedReader speedReader, KeyValueConfigurationCollection settings, string message)
+        {
+            speedReader.CurrentReadOption = NonStringInput<ReadOptions>.ReceiveCorrectInputValues(message, ReadAndCapitalizeInputAndPreserveCase, NonStringInput<ReadOptions>.IsParsedCorrectly);
+            ChangeSetting("readOption", speedReader.CurrentReadOption.ToString(), settings);
+        }
+
     }
 }
