@@ -78,7 +78,7 @@ namespace SpeedReaderTextUserInterface
             parsedValue = ParseValue(out parsedSuccessfully, TryParseMethod, parameters, parsedValueIndex);
         }
 
-        private static T ParseValue(out bool parsedSuccessfully, System.Reflection.MethodInfo TryParseMethod,
+        public static T ParseValue(out bool parsedSuccessfully, System.Reflection.MethodInfo TryParseMethod,
                                         object?[] parameters, int parsedValueIndex)
         {
             parsedSuccessfully = ( bool? ) TryParseMethod.Invoke(null, parameters) ?? false;
