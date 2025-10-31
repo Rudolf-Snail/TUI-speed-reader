@@ -94,6 +94,27 @@ namespace SpeedReaderTextUserInterface
         // TODO: Refactor ConfigurationManager methods
         public static bool GetAlignmentConfigurationValueOrDefaultValue(string settingName) => bool.TryParse(ConfigurationManager.AppSettings[settingName], out bool result) ? result : default;
 
+        public static T GetConfigurationManagerValueOrDefaultValue<T>(string value) where T : struct
+        {
+            var TryParseMethod = NonStringInput<T>.GetTryParseMethodBasedOnType($"Type {nameof(T)} does not have a TryParse method.");
+
+            object?[] parameters;
+            int parsedValueIndex;
+
+            if (!typeof(T).IsSubclassOf(typeof(Enum)))
+            {
+                parameters = [ConfigurationManager.AppSettings[value], null];
+                parsedValueIndex = 1;
+            }
+            else
+            {
+                parameters = [typeof(T), ConfigurationManager.AppSettings[value], null];
+                parsedValueIndex = 2;
+            }
+
+            return NonStringInput<T>.ParseValue(out bool parsedSuccessfully, TryParseMethod, parameters, parsedValueIndex);
+        }
+
         public static SpeedOptions GetSpeedOptionConfigurationValueOrDefaultValue() => Enum.TryParse(ConfigurationManager.AppSettings["speedOption"], out SpeedOptions result) ? result : default;
 
         public static bool GetExitAfterSpeedReadingConfigurationValueOrDefaultValue() => bool.TryParse(ConfigurationManager.AppSettings["exitAfterSpeedReading"], out bool result) ? result : default;
