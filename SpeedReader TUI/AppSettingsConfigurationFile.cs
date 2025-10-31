@@ -40,12 +40,11 @@ namespace SpeedReaderTextUserInterface
         }
 
         public static void ConfigureExitSettings(SpeedReader speedReader)
+        public static void ConfigureSetting(SpeedReader speedReader, string message, SetPropertyAndChangeSetting setProperty)
         {
             ConfigurationFileAppSettings(out Configuration configFile, out KeyValueConfigurationCollection settings);
 
-            string message = $"Do you wish to exit after speed reading through text? Type in True for yes and False for no — current value is {speedReader.ExitAfterSpeedReading}: ";
-            speedReader.ExitAfterSpeedReading = NonStringInput<bool>.ReceiveCorrectInputValues(message, JustReadInput, NonStringInput<bool>.IsParsedCorrectly);
-            ChangeSetting("exitAfterSpeedReading", speedReader.ExitAfterSpeedReading.ToString(), settings);
+            setProperty(speedReader, settings, message);
 
             SaveSettings(configFile);
             ReloadSettings(configFile);
