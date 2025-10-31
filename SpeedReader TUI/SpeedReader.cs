@@ -394,6 +394,32 @@ namespace SpeedReaderTextUserInterface
             }
 
 
+        private bool IsSpacebarPressed(CancellationTokenSource cancellationTokenSource)
+        {
+            CancellationToken cancellationToken = cancellationTokenSource.Token;
+
+            ConsoleKeyInfo keyPressed;
+
+            while (!cancellationToken.IsCancellationRequested)
+            {
+                if (Console.KeyAvailable && !cancellationToken.IsCancellationRequested)
+                {
+                    keyPressed = Console.ReadKey();
+
+                    if (keyPressed.Key == ConsoleKey.Spacebar)
+                    {
+                        CurrentReadOption = ReadOptions.Manual;
+                        cancellationTokenSource.Cancel();
+                        return true;
+                    }
+                }
+            }
+
+            ConsoleCleanUp();
+
+            return false;
+        }
+
         private void ConsoleCleanUp()
         {
             Console.Clear();
