@@ -26,7 +26,7 @@ namespace SpeedReaderTextUserInterface
             return parsedValue;
         }
 
-        private static System.Reflection.MethodInfo GetTryParseMethodBasedOnType(string message)
+        public static System.Reflection.MethodInfo GetTryParseMethodBasedOnType(string message)
         {
             System.Reflection.MethodInfo? TryParseMethod = TryToGetTryParseMethodBasedOnType();
 
