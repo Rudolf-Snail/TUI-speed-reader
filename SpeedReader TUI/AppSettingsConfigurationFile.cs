@@ -125,6 +125,8 @@ namespace SpeedReaderTextUserInterface
         }
 
         public static SpeedOptions GetSpeedOptionConfigurationValueOrDefaultValue() => Enum.TryParse(ConfigurationManager.AppSettings["speedOption"], out SpeedOptions result) ? result : default;
+        // Delegates
+        public delegate void SetPropertyAndChangeSetting(SpeedReader speedReader, KeyValueConfigurationCollection settings, string message);
 
         public static bool GetExitAfterSpeedReadingConfigurationValueOrDefaultValue() => bool.TryParse(ConfigurationManager.AppSettings["exitAfterSpeedReading"], out bool result) ? result : default;
     }
