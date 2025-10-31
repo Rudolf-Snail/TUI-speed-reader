@@ -212,7 +212,7 @@ namespace SpeedReaderTextUserInterface
             string message1 = "How do you wish to enter the text to speedread?\n";
             string options = "Options:\n";
             string textOptionsWithDescriptions = TextOption.DescribeAllValues(this);
-            string choice = "\nType in the name or number of the option you wish to choose: ";
+            string choice = "\nType in the name or number of the option you wish to choose and press the Enter key: ";
 
             string[] messages = [message1, options, textOptionsWithDescriptions, choice];
 
