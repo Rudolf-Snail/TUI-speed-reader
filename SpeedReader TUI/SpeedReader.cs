@@ -201,7 +201,7 @@ namespace SpeedReaderTextUserInterface
             }
         }
 
-        public void ProcessUserInput()
+        private void ProcessUserInput()
         {
             SelectOption();
             ProcessOption();
@@ -278,7 +278,7 @@ namespace SpeedReaderTextUserInterface
 #pragma warning restore CS8604 // Possible null reference argument.
         }
 
-        public void ProcessSpeed()
+        private void ProcessSpeed()
         {
             string message = $"Enter the speed you wish to read the text at — the current speed option is {CurrentSpeedOption} — the number has to be a positive value: ";
 
@@ -295,7 +295,7 @@ namespace SpeedReaderTextUserInterface
             return words;
         }
 
-        public decimal MillisecondsPerWord()
+        private decimal MillisecondsPerWord()
         {
             decimal millisecondsPerSecond = 1000;
             decimal millisecondsPerWord = SecondsPerWord * millisecondsPerSecond;
@@ -303,7 +303,7 @@ namespace SpeedReaderTextUserInterface
             return millisecondsPerWord;
         }
 
-        public void ProcessSpeedOption()
+        private void ProcessSpeedOption()
         {
             switch (CurrentSpeedOption)
             {
