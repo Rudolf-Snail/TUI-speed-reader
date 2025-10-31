@@ -18,6 +18,7 @@ namespace SpeedReaderTextUserInterface
         private string[] words = [];
         private string? currentWord;
 
+        private ReadOptions currentReadOption;
         private bool currentAlignHorizontallyOption;
         private bool currentAlignVerticallyOption;
         private bool exitAfterSpeedReading;
@@ -104,12 +105,17 @@ namespace SpeedReaderTextUserInterface
             }
         }
 
+        public ReadOptions CurrentReadOption
         {
             get
             {
+                return currentReadOption;
             }
             set
             {
+                currentReadOption = value;
+            }
+        }
 
         public bool CurrentAlignHorizontallyOption
         {
@@ -162,6 +168,7 @@ namespace SpeedReaderTextUserInterface
         // Constructors
         public SpeedReader()
         {
+            CurrentReadOption = GetReadOptionConfigurationValueOrDefaultValue();
             CurrentSpeedOption = GetSpeedOptionConfigurationValueOrDefaultValue();
             CurrentAlignHorizontallyOption = GetHorizontalAlignmentConfigurationValueOrDefaultValue();
             CurrentAlignVerticallyOption = GetVerticalAlignmentConfigurationValueOrDefaultValue();
@@ -217,6 +224,9 @@ namespace SpeedReaderTextUserInterface
                     break;
                 case TextOptions.File:
                     FileUserInput();
+                    break;
+                case TextOptions.ReadOption:
+                    ConfigureReadingOptionSetting(this);
                     break;
                 case TextOptions.SpeedOption:
                     ConfigureSpeedOptionSettings(this);
