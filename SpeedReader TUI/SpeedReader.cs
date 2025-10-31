@@ -332,19 +332,41 @@ namespace SpeedReaderTextUserInterface
 
         private decimal ConvertSpeedToSecondsPerText() => Speed / Words.Length;
 
-        public async Task SpeedReadText()
+        private async Task SpeedReadTextAsync()
         {
             if (Text is null)
                 return;
 
             Words = ConvertTextToWords();
 
-            ProcessSpeedOption();
-            decimal millisecondsPerWord = MillisecondsPerWord();
-
             ProcessWord wordProcessor = ProcessWordAlignment();
 
-            await SpeedReadWords(millisecondsPerWord, wordProcessor);
+            bool keepReading;
+
+            do
+            {
+                switch (CurrentReadOption)
+                {
+                    case ReadOptions.Manual:
+                        keepReading = ManuallyReadWords(wordProcessor);
+                        break;
+                    case ReadOptions.Automatic:
+                        SetSpeedIfItIsNotSet();
+
+                        var cancellationTokenSource = new CancellationTokenSource();
+
+                        var automaticallyReadWordsTask = AutomaticallyReadWordsAsync(MillisecondsPerWord(), wordProcessor, cancellationTokenSource);
+                        IsSpacebarPressed(cancellationTokenSource);
+
+                        keepReading = await automaticallyReadWordsTask;
+
+                        break;
+                    default:
+                        throw new ArgumentException("The value of CurrentReadOption is not correct.");
+                }
+            } while (keepReading);
+        }
+
         private void SetSpeedIfItIsNotSet()
         {
             if (Speed != 0)
