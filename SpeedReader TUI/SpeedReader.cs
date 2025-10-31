@@ -345,6 +345,13 @@ namespace SpeedReaderTextUserInterface
             ProcessWord wordProcessor = ProcessWordAlignment();
 
             await SpeedReadWords(millisecondsPerWord, wordProcessor);
+        private void SetSpeedIfItIsNotSet()
+        {
+            if (Speed != 0)
+                return;
+
+            ProcessSpeed();
+            ProcessSpeedOption();
         }
 
         private ProcessWord ProcessWordAlignment()
