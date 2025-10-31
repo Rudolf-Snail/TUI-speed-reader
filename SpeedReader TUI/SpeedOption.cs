@@ -4,7 +4,7 @@ namespace SpeedReaderTextUserInterface
     {
         public static SpeedOptions[] ArrayOfValues() => [SpeedOptions.WordsPerSecond, SpeedOptions.WordsPerMinute, SpeedOptions.SecondsPerText, SpeedOptions.MinutesPerText];
 
-        public static string ValueDescriptionText(SpeedOptions value)
+        public static string ValueDescriptionText(SpeedOptions value, SpeedReader? _ = null)
             => value switch
             {
                 SpeedOptions.WordsPerSecond => $"Type in {SpeedOptions.WordsPerSecond} or {(int)SpeedOptions.WordsPerSecond}, if you wish to set the amount of words per second the speed reader will display.",
@@ -14,17 +14,7 @@ namespace SpeedReaderTextUserInterface
                 _ => throw new ArgumentException($"The specified option — {value} — is not valid."),
             };
 
-        public static string DescribeAllValues()
-        {
-            var values = ArrayOfValues();
-            var valuesLength = values.Length;
-            var descriptionOfValues = new string[valuesLength];
-
-            for (int index = 0; index < valuesLength; index++)
-                descriptionOfValues[index] = ValueDescriptionText(values[index]);
-
-            return string.Join("\n", descriptionOfValues);
-        }
+        public static string DescribeAllValues() => Option<SpeedOptions>.DescribeAllValues(ArrayOfValues(), ValueDescriptionText);
     }
 
     public enum SpeedOptions
