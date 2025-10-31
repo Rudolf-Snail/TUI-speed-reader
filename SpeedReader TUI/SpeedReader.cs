@@ -351,11 +351,11 @@ namespace SpeedReaderTextUserInterface
         {
             ProcessWord wordProcessor;
 
-            if (!AlignHorizontally && !AlignVertically)
+            if (!CurrentAlignHorizontallyOption && !CurrentAlignVerticallyOption)
                 wordProcessor = DoNotAlignWord;
-            else if (AlignHorizontally && !AlignVertically)
+            else if (CurrentAlignHorizontallyOption && !CurrentAlignVerticallyOption)
                 wordProcessor = AlignWordHorizontally;
-            else if (!AlignHorizontally && AlignVertically)
+            else if (!CurrentAlignHorizontallyOption && CurrentAlignVerticallyOption)
                 wordProcessor = AlignWordVertically;
             else
                 wordProcessor = CenterWord;
