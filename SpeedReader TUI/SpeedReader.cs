@@ -18,8 +18,8 @@ namespace SpeedReaderTextUserInterface
         private string[] words = [];
         private string? currentWord;
 
-        private bool alignVertically;
         private bool currentAlignHorizontallyOption;
+        private bool currentAlignVerticallyOption;
         private bool exitAfterSpeedReading;
 
         // Properties
@@ -104,15 +104,12 @@ namespace SpeedReaderTextUserInterface
             }
         }
 
-        public bool AlignVertically
         {
             get
             {
-                return alignVertically;
             }
             set
             {
-                alignVertically = value;
 
         public bool CurrentAlignHorizontallyOption
         {
@@ -125,6 +122,16 @@ namespace SpeedReaderTextUserInterface
                 currentAlignHorizontallyOption = value;
             }
         }
+
+        public bool CurrentAlignVerticallyOption
+        {
+            get
+            {
+                return currentAlignVerticallyOption;
+            }
+            set
+            {
+                currentAlignVerticallyOption = value;
             }
         }
 
@@ -156,8 +163,8 @@ namespace SpeedReaderTextUserInterface
         public SpeedReader()
         {
             CurrentSpeedOption = GetSpeedOptionConfigurationValueOrDefaultValue();
-            AlignVertically = GetAlignmentConfigurationValueOrDefaultValue("alignVertically");
             CurrentAlignHorizontallyOption = GetHorizontalAlignmentConfigurationValueOrDefaultValue();
+            CurrentAlignVerticallyOption = GetVerticalAlignmentConfigurationValueOrDefaultValue();
             ExitAfterSpeedReading = GetExitAfterSpeedReadingConfigurationValueOrDefaultValue();
         }
 
