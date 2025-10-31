@@ -389,31 +389,53 @@ namespace SpeedReaderTextUserInterface
             Console.Clear();
         }
 
-        public string PadVertically(int height) => string.Concat(Enumerable.Repeat("\n", height / 2));
+        private string PadVertically() => string.Concat(Enumerable.Repeat("\n", Console.WindowHeight / 2));
 
-        public string PadHorizontally(int width)
+        private string PadHorizontally(string? text = null)
         {
-            if (CurrentWord == null)
-                throw new ArgumentNullException(CurrentWord, "The CurrentWord property contains a null value.");
+            CheckIfCurrentWordAndTextIsNull(text);
 
-            return CurrentWord.PadLeft(width / 2);
+            if (text != null)
+                return text.PadLeft((Console.WindowWidth / 2) + (text.Length / 2));
+            else
+#pragma warning disable CS8602 // Dereference of a possibly null reference. CurrentWord CANNOT be null here, but the compiler doesn't see it. 
+                return CurrentWord.PadLeft((Console.WindowWidth / 2) + (CurrentWord.Length / 2));
+#pragma warning restore CS8602 // Dereference of a possibly null reference.
+        }
+
+        private void CheckIfCurrentWordAndTextIsNull(string? text)
+        {
+            if (CurrentWord == null && text == null)
+                throw new NullReferenceException("The CurrentWord property and the text argument are null.");
         }
 
         // Delegates
-        public delegate string ProcessWord(int width, int height);
+        private delegate string ProcessWord(string? text = null);
 
-        public string DoNotAlignWord(int width, int height)
+        private string DoNotAlignWord(string? text = null)
         {
-            if (CurrentWord == null)
-                throw new ArgumentNullException(CurrentWord, "The CurrentWord property contains a null value.");
+            CheckIfCurrentWordAndTextIsNull(text);
 
-            return CurrentWord;
+            if (text != null)
+                return text;
+            else
+#pragma warning disable CS8603 // Possible null reference return. CurrentWord CANNOT be null here, but the compiler doesn't see it. 
+                return CurrentWord;
+#pragma warning restore CS8603 // Possible null reference return.
         }
 
-        public string AlignWordHorizontally(int width, int height) => PadHorizontally(width);
+        private string AlignWordHorizontally(string? text = null) => PadHorizontally(text);
 
-        public string AlignWordVertically(int width, int height) => PadVertically(height) + CurrentWord;
+        private string AlignWordVertically(string? text = null)
+        {
+            CheckIfCurrentWordAndTextIsNull(text);
 
-        public string CenterWord(int width, int height) => PadVertically(height) + PadHorizontally(width);
+            if (text != null)
+                return PadVertically() + text;
+            else
+                return PadVertically() + CurrentWord;
+        }
+
+        private string CenterWord(string? text = null) => PadVertically() + PadHorizontally(text);
     }
 }
