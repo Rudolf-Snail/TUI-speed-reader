@@ -386,7 +386,11 @@ namespace SpeedReaderTextUserInterface
                 timer.Reset();
             }
 
+
+        private void ConsoleCleanUp()
+        {
             Console.Clear();
+            Console.Title = "Speed reader";
         }
 
         private string PadVertically() => string.Concat(Enumerable.Repeat("\n", Console.WindowHeight / 2));
