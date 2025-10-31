@@ -147,5 +147,11 @@ namespace SpeedReaderTextUserInterface
             ChangeSetting("alignHorizontally", speedReader.CurrentAlignHorizontallyOption.ToString(), settings);
         }
 
+        public static void SetCurrentAlignVerticallyOptionPropertyAndChangeSetting(SpeedReader speedReader, KeyValueConfigurationCollection settings, string message)
+        {
+            speedReader.CurrentAlignVerticallyOption = NonStringInput<bool>.ReceiveCorrectInputValues(message, JustReadInput, NonStringInput<bool>.IsParsedCorrectly);
+            ChangeSetting("alignVertically", speedReader.CurrentAlignVerticallyOption.ToString(), settings);
+        }
+
     }
 }
