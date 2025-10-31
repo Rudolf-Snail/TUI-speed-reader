@@ -56,9 +56,9 @@ namespace SpeedReaderTextUserInterface
             ConfigurationFileAppSettings(out Configuration configFile, out KeyValueConfigurationCollection settings);
 
             ChangeSetting("alignVertically", "false", settings);
-            speedReader.AlignHorizontally = false;
+            speedReader.CurrentAlignHorizontallyOption = false;
             ChangeSetting("alignVertically", "false", settings);
-            speedReader.AlignVertically = false;
+            speedReader.CurrentAlignVerticallyOption = false;
 
             ChangeSetting("speedOption", SpeedOptions.WordsPerSecond.ToString(), settings);
             speedReader.CurrentSpeedOption = SpeedOptions.WordsPerSecond;
