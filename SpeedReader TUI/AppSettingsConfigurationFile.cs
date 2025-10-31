@@ -153,5 +153,10 @@ namespace SpeedReaderTextUserInterface
             ChangeSetting("alignVertically", speedReader.CurrentAlignVerticallyOption.ToString(), settings);
         }
 
+        public static void SetCurrentExitAfterSpeedReadingOptionPropertyAndChangeSetting(SpeedReader speedReader, KeyValueConfigurationCollection settings, string message)
+        {
+            speedReader.ExitAfterSpeedReading = NonStringInput<bool>.ReceiveCorrectInputValues(message, JustReadInput, NonStringInput<bool>.IsParsedCorrectly);
+            ChangeSetting("exitAfterSpeedReading", speedReader.ExitAfterSpeedReading.ToString(), settings);
+        }
     }
 }
