@@ -5,38 +5,43 @@ namespace SpeedReaderTextUserInterface
 {
     internal static class AppSettingsConfigurationFile
     {
+        public static void ConfigureReadingOptionSetting(SpeedReader speedReader)
         {
-            ConfigurationFileAppSettings(out Configuration configFile, out KeyValueConfigurationCollection settings);
+            string message = "What reading option do you wish to use?\n";
+            string options = "Options:\n";
+            string readOptionsWithDescriptions = ReadOption.DescribeAllValues();
+            string choice = $"\nType in the name or number of the option you wish to choose — current option is {speedReader.CurrentReadOption} — and press the Enter key: ";
+
+            string[] messages = [message, options, readOptionsWithDescriptions, choice];
+
+            ConfigureSetting(speedReader, messages, SetCurrentReadOptionPropertyAndChangeSetting);
+        }
 
         public static void ConfigureSpeedOptionSetting(SpeedReader speedReader)
+        {
             string message1 = "What speed option do you wish to use?\n";
             string options = "Options:\n";
             string speedOptionsWithDescriptions = SpeedOption.DescribeAllValues();
-            string choice = $"\nType in the name or number of the option you wish to choose — current option is {speedReader.CurrentSpeedOption}: ";
+            string choice = $"\nType in the name or number of the option you wish to choose — current option is {speedReader.CurrentSpeedOption} — and press the Enter key: ";
 
             string[] messages = [message1, options, speedOptionsWithDescriptions, choice];
 
-            speedReader.CurrentSpeedOption = NonStringInput<SpeedOptions>.ReceiveCorrectInputValues(messages, ReadAndCapitalizeInputAndPreserveCase, NonStringInput<SpeedOptions>.IsParsedCorrectly);
-            ChangeSetting("speedOption", speedReader.CurrentSpeedOption.ToString(), settings);
+            ConfigureSetting(speedReader, messages, SetCurrentSpeedOptionPropertyAndChangeSetting);
+        }
 
-            SaveSettings(configFile);
-            ReloadSettings(configFile);
         }
 
         public static void ConfigureAlignmentSettings(SpeedReader speedReader)
         {
             ConfigurationFileAppSettings(out Configuration configFile, out KeyValueConfigurationCollection settings);
 
-            string message1 = $"Do you wish to align the text horizontally? Type in True for yes and False for no — current value is {speedReader.AlignHorizontally}: ";
-            speedReader.AlignHorizontally = NonStringInput<bool>.ReceiveCorrectInputValues(message1, JustReadInput, NonStringInput<bool>.IsParsedCorrectly);
-            ChangeSetting("alignHorizontally", speedReader.AlignHorizontally.ToString(), settings);
+        public static void ConfigureExitOptionSetting(SpeedReader speedReader)
+        {
+            string message = $"Do you wish to exit after speed reading through text? Type in True for yes and False for no — current value is {speedReader.ExitAfterSpeedReading} — and press the Enter key: ";
 
-            string message2 = $"Do you wish to align the text vertically? Type in True for yes and False for no — current value is {speedReader.AlignVertically}: ";
-            speedReader.AlignVertically = NonStringInput<bool>.ReceiveCorrectInputValues(message2, JustReadInput, NonStringInput<bool>.IsParsedCorrectly);
-            ChangeSetting("alignVertically", speedReader.AlignVertically.ToString(), settings);
+            ConfigureSetting(speedReader, message, SetCurrentExitAfterSpeedReadingOptionPropertyAndChangeSetting);
+        }
 
-            SaveSettings(configFile);
-            ReloadSettings(configFile);
         public static void ConfigureSetting(SpeedReader speedReader, string[] messagesToJoinTogether, SetPropertyAndChangeSetting setProperty)
         {
             string message = string.Concat(messagesToJoinTogether);
@@ -44,7 +49,6 @@ namespace SpeedReaderTextUserInterface
             ConfigureSetting(speedReader, message, setProperty);
         }
 
-        public static void ConfigureExitSettings(SpeedReader speedReader)
         public static void ConfigureSetting(SpeedReader speedReader, string message, SetPropertyAndChangeSetting setProperty)
         {
             ConfigurationFileAppSettings(out Configuration configFile, out KeyValueConfigurationCollection settings);
@@ -128,11 +132,9 @@ namespace SpeedReaderTextUserInterface
             return NonStringInput<T>.ParseValue(out bool parsedSuccessfully, TryParseMethod, parameters, parsedValueIndex);
         }
 
-        public static SpeedOptions GetSpeedOptionConfigurationValueOrDefaultValue() => Enum.TryParse(ConfigurationManager.AppSettings["speedOption"], out SpeedOptions result) ? result : default;
         // Delegates
         public delegate void SetPropertyAndChangeSetting(SpeedReader speedReader, KeyValueConfigurationCollection settings, string message);
 
-        public static bool GetExitAfterSpeedReadingConfigurationValueOrDefaultValue() => bool.TryParse(ConfigurationManager.AppSettings["exitAfterSpeedReading"], out bool result) ? result : default;
         public static void SetCurrentReadOptionPropertyAndChangeSetting(SpeedReader speedReader, KeyValueConfigurationCollection settings, string message)
         {
             speedReader.CurrentReadOption = NonStringInput<ReadOptions>.ReceiveCorrectInputValues(message, ReadAndCapitalizeInputAndPreserveCase, NonStringInput<ReadOptions>.IsParsedCorrectly);
