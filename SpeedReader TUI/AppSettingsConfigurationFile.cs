@@ -37,6 +37,11 @@ namespace SpeedReaderTextUserInterface
 
             SaveSettings(configFile);
             ReloadSettings(configFile);
+        public static void ConfigureSetting(SpeedReader speedReader, string[] messagesToJoinTogether, SetPropertyAndChangeSetting setProperty)
+        {
+            string message = string.Concat(messagesToJoinTogether);
+
+            ConfigureSetting(speedReader, message, setProperty);
         }
 
         public static void ConfigureExitSettings(SpeedReader speedReader)
