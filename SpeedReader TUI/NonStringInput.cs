@@ -39,7 +39,7 @@ namespace SpeedReaderTextUserInterface
         public static T ReceiveCorrectInputValues(string[] messageToWriteToConsole, ReadAndProcessInput readAndProcessInput,
                                                   SuccessCondition successCondition, string incorrectDataMessage = "This option is not correct, please try again.")
         {
-            string message = String.Concat(messageToWriteToConsole);
+            string message = string.Concat(messageToWriteToConsole);
 
             return ReceiveCorrectInputValues(message, readAndProcessInput, successCondition, incorrectDataMessage);
         }
