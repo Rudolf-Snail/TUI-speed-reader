@@ -233,7 +233,8 @@ namespace SpeedReaderTextUserInterface
                     ConfigureReadingOptionSetting(this);
                     break;
                 case TextOptions.SpeedOption:
-                    ConfigureSpeedOptionSettings(this);
+                    ConfigureSpeedOptionSetting(this);
+                    break;
                 case TextOptions.AlignHorizontallyOption:
                     ConfigureHorizontalAlignmentOptionSetting(this);
                     break;
@@ -241,7 +242,7 @@ namespace SpeedReaderTextUserInterface
                     ConfigureVerticalAlignmentOptionSetting(this);
                     break;
                 case TextOptions.ExitOption:
-                    ConfigureExitSettings(this);
+                    ConfigureExitOptionSetting(this);
                     break;
                 case TextOptions.Reset:
                     ResetOptionSettings(this);
