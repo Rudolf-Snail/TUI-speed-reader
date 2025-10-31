@@ -203,6 +203,8 @@ namespace SpeedReaderTextUserInterface
 
         private void ProcessUserInput()
         {
+            Console.Title = $"Speed reader — select option.";
+
             SelectOption();
             ProcessOption();
         }
