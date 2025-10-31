@@ -135,5 +135,11 @@ namespace SpeedReaderTextUserInterface
             ChangeSetting("readOption", speedReader.CurrentReadOption.ToString(), settings);
         }
 
+        public static void SetCurrentSpeedOptionPropertyAndChangeSetting(SpeedReader speedReader, KeyValueConfigurationCollection settings, string message)
+        {
+            speedReader.CurrentSpeedOption = NonStringInput<SpeedOptions>.ReceiveCorrectInputValues(message, ReadAndCapitalizeInputAndPreserveCase, NonStringInput<SpeedOptions>.IsParsedCorrectly);
+            ChangeSetting("speedOption", speedReader.CurrentSpeedOption.ToString(), settings);
+        }
+
     }
 }
