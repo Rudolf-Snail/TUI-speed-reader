@@ -17,6 +17,7 @@ namespace SpeedReaderTextUserInterface
         private decimal secondsPerWord = 0;
         private string[] words = [];
         private string? currentWord;
+        private int index = 0;
 
         private ReadOptions currentReadOption;
         private bool currentAlignHorizontallyOption;
@@ -96,12 +97,15 @@ namespace SpeedReaderTextUserInterface
             }
         }
 
+        public int Index
         {
             get
             {
+                return index;
             }
             set
             {
+                index = value;
             }
         }
 
