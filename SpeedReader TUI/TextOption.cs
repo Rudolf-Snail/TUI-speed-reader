@@ -2,7 +2,7 @@ namespace SpeedReaderTextUserInterface
 {
     internal static class TextOption
     {
-        public static TextOptions[] ArrayOfValues() => [TextOptions.Text, TextOptions.File, TextOptions.SpeedOption, TextOptions.AlignOption, TextOptions.ExitOption, TextOptions.Reset, TextOptions.Exit];
+        public static TextOptions[] ArrayOfValues() => [TextOptions.Text, TextOptions.File, TextOptions.ReadOption, TextOptions.SpeedOption, TextOptions.AlignHorizontallyOption, TextOptions.AlignVerticallyOption, TextOptions.ExitOption, TextOptions.Reset, TextOptions.Exit];
 
         public static string ValueDescriptionText(TextOptions value, SpeedReader speedReader)
             => value switch
@@ -35,8 +35,10 @@ namespace SpeedReaderTextUserInterface
     {
         Text,
         File,
+        ReadOption,
         SpeedOption,
-        AlignOption,
+        AlignHorizontallyOption,
+        AlignVerticallyOption,
         ExitOption,
         Reset,
         Exit
