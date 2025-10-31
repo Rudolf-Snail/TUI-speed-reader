@@ -180,7 +180,7 @@ namespace SpeedReaderTextUserInterface
         }
 
         // Methods
-        public async Task ReadEvaluateProcessLoop()
+        public async Task ReadEvaluateProcessLoopAsync()
         {
             while (true)
             {
@@ -192,11 +192,17 @@ namespace SpeedReaderTextUserInterface
                 }
                 else if (CurrentTextOption == TextOptions.Text || CurrentTextOption == TextOptions.File)
                 {
-                    ProcessSpeed();
-                    await SpeedReadText();
+                    Index = 0;
+                    Speed = 0;
+
+                    var holdCurrentReadOptionValue = CurrentReadOption;
+
+                    await SpeedReadTextAsync();
 
                     if (ExitAfterSpeedReading)
                         break;
+
+                    currentReadOption = holdCurrentReadOptionValue;
                 }
             }
         }

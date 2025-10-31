@@ -8,4 +8,4 @@ Console.InputEncoding = System.Text.Encoding.Unicode;
 Console.OutputEncoding = System.Text.Encoding.Unicode;
 
 SpeedReader speedReader = new();
-await speedReader.ReadEvaluateProcessLoop();
+await speedReader.ReadEvaluateProcessLoopAsync();
