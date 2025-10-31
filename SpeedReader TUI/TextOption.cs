@@ -4,8 +4,13 @@ namespace SpeedReaderTextUserInterface
     {
         public static TextOptions[] ArrayOfValues() => [TextOptions.Text, TextOptions.File, TextOptions.ReadOption, TextOptions.SpeedOption, TextOptions.AlignHorizontallyOption, TextOptions.AlignVerticallyOption, TextOptions.ExitOption, TextOptions.Reset, TextOptions.Exit];
 
-        public static string ValueDescriptionText(TextOptions value, SpeedReader speedReader)
-            => value switch
+        public static string ValueDescriptionText(TextOptions value, SpeedReader? speedReader)
+        {
+
+            if (speedReader == null)
+                throw new ArgumentNullException(nameof(speedReader), "The parameter speedReader cannot be null.");
+
+            return value switch
             {
                 TextOptions.Text => $"Type in {TextOptions.Text} or {(int)TextOptions.Text}, if you wish to read text from the command line.",
                 TextOptions.File => $"Type in {TextOptions.File} or {(int)TextOptions.File}, if you wish to read text from a file.",
@@ -18,18 +23,9 @@ namespace SpeedReaderTextUserInterface
                 TextOptions.Exit => $"Type in {TextOptions.Exit} or {(int)TextOptions.Exit}, if you wish to exit this program.",
                 _ => throw new ArgumentException($"The specified option — {value} — is not valid."),
             };
-        
-        public static string DescribeAllValues(SpeedReader speedReader)
-        {
-            var values = ArrayOfValues();
-            var valuesLength = values.Length;
-            var descriptionOfValues = new string[valuesLength];
-
-            for (int index = 0; index < valuesLength; index++)
-                descriptionOfValues[index] = ValueDescriptionText(values[index], speedReader);
-
-            return string.Join("\n", descriptionOfValues);
         }
+
+        public static string DescribeAllValues(SpeedReader speedReader) => Option<TextOptions>.DescribeAllValues(ArrayOfValues(), ValueDescriptionText, speedReader);
     }
 
 
