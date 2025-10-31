@@ -29,11 +29,20 @@ namespace SpeedReaderTextUserInterface
             ConfigureSetting(speedReader, messages, SetCurrentSpeedOptionPropertyAndChangeSetting);
         }
 
+        public static void ConfigureHorizontalAlignmentOptionSetting(SpeedReader speedReader)
+        {
+            string message = $"Do you wish to align the text horizontally? Type in True for yes and False for no — current value is {speedReader.CurrentAlignHorizontallyOption} — and press the Enter key: ";
+
+            ConfigureSetting(speedReader, message, SetCurrentAlignHorizontallyOptionPropertyAndChangeSetting);
         }
 
-        public static void ConfigureAlignmentSettings(SpeedReader speedReader)
+
+        public static void ConfigureVerticalAlignmentOptionSetting(SpeedReader speedReader)
         {
-            ConfigurationFileAppSettings(out Configuration configFile, out KeyValueConfigurationCollection settings);
+            string message = $"Do you wish to align the text vertically? Type in True for yes and False for no — current value is {speedReader.CurrentAlignVerticallyOption} — and press the Enter key: ";
+
+            ConfigureSetting(speedReader, message, SetCurrentAlignVerticallyOptionPropertyAndChangeSetting);
+        }
 
         public static void ConfigureExitOptionSetting(SpeedReader speedReader)
         {
