@@ -369,22 +369,22 @@ namespace SpeedReaderTextUserInterface
             return wordProcessor;
         }
 
-        private async Task SpeedReadWords(decimal millisecondsPerWord, ProcessWord wordProcessor)
+        private async Task<bool> AutomaticallyReadWordsAsync(decimal millisecondsPerWord, ProcessWord wordProcessor, CancellationTokenSource cancellationTokenSource)
         {
-            int width = Console.WindowWidth;
-            int height = Console.WindowHeight;
+            CancellationToken cancellationToken = cancellationTokenSource.Token;
 
-            Stopwatch? timer; 
+            Console.Title = "Speed reader — automatic reading.";
 
-            foreach (string word in Words)
+            Stopwatch? timer;
+
+            while (Index >= 0 && Index < Words.Length && !cancellationToken.IsCancellationRequested)
             {
                 timer = Stopwatch.StartNew();
-                
+
                 Console.Clear();
 
-                CurrentWord = word;
-
-                Console.WriteLine(wordProcessor(width, height));
+                CurrentWord = Words[Index++];
+                Console.WriteLine(wordProcessor());
 
                 timer.Stop();
 
@@ -393,6 +393,14 @@ namespace SpeedReaderTextUserInterface
                 timer.Reset();
             }
 
+            ConsoleCleanUp();
+
+            if (cancellationToken.IsCancellationRequested)
+                return true;
+
+            cancellationTokenSource.Cancel();
+            return false;
+        }
 
         private bool IsSpacebarPressed(CancellationTokenSource cancellationTokenSource)
         {
