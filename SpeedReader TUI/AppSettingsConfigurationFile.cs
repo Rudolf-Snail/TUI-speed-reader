@@ -91,8 +91,15 @@ namespace SpeedReaderTextUserInterface
             ConfigurationManager.RefreshSection(configFile.AppSettings.SectionInformation.Name);
         }
 
-        // TODO: Refactor ConfigurationManager methods
-        public static bool GetAlignmentConfigurationValueOrDefaultValue(string settingName) => bool.TryParse(ConfigurationManager.AppSettings[settingName], out bool result) ? result : default;
+        public static ReadOptions GetReadOptionConfigurationValueOrDefaultValue() => GetConfigurationManagerValueOrDefaultValue<ReadOptions>("readOption");
+
+        public static bool GetHorizontalAlignmentConfigurationValueOrDefaultValue() => GetConfigurationManagerValueOrDefaultValue<bool>("alignHorizontally");
+
+        public static bool GetVerticalAlignmentConfigurationValueOrDefaultValue() => GetConfigurationManagerValueOrDefaultValue<bool>("alignVertically");
+
+        public static SpeedOptions GetSpeedOptionConfigurationValueOrDefaultValue() => GetConfigurationManagerValueOrDefaultValue<SpeedOptions>("speedOption");
+
+        public static bool GetExitAfterSpeedReadingConfigurationValueOrDefaultValue() => GetConfigurationManagerValueOrDefaultValue<bool>("exitAfterSpeedReading");
 
         public static T GetConfigurationManagerValueOrDefaultValue<T>(string value) where T : struct
         {
