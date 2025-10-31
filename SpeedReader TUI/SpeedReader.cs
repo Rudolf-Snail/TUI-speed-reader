@@ -420,6 +420,49 @@ namespace SpeedReaderTextUserInterface
             return false;
         }
 
+        private bool ManuallyReadWords(ProcessWord wordProcessor)
+        {
+            ConsoleKeyInfo keyPressed;
+
+            while (Index >= 0 && Index < Words.Length)
+            {
+                Console.Clear();
+
+                Console.Title = $"Speed reader — manual reading: word {Index + 1}/{Words.Length}.";
+
+                CurrentWord = Words[Index];
+                Console.WriteLine(wordProcessor());
+
+                keyPressed = Console.ReadKey();
+
+                switch (keyPressed.Key)
+                {
+                    case ConsoleKey.LeftArrow:
+                        Index--;
+                        break;
+                    case ConsoleKey.RightArrow:
+                        Index++;
+                        break;
+                    case ConsoleKey.Escape:
+                        ConsoleCleanUp();
+                        return false;
+                    case ConsoleKey.Spacebar:
+                        ConsoleCleanUp();
+                        CurrentReadOption = ReadOptions.Automatic;
+                        return true;
+                    default:
+                        Console.Clear();
+                        Console.WriteLine(wordProcessor("This key does not have any function associated with it. Supported keys are: left arrow, right arrow, escape and spacebar. \nPress a key to continue."));
+                        Console.ReadKey();
+                        break;
+                }
+            }
+
+            ConsoleCleanUp();
+
+            return false;
+        }
+
         private void ConsoleCleanUp()
         {
             Console.Clear();
