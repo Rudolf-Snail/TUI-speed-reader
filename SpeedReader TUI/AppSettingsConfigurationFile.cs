@@ -5,10 +5,10 @@ namespace SpeedReaderTextUserInterface
 {
     internal static class AppSettingsConfigurationFile
     {
-        public static void ConfigureSpeedOptionSettings(SpeedReader speedReader)
         {
             ConfigurationFileAppSettings(out Configuration configFile, out KeyValueConfigurationCollection settings);
 
+        public static void ConfigureSpeedOptionSetting(SpeedReader speedReader)
             string message1 = "What speed option do you wish to use?\n";
             string options = "Options:\n";
             string speedOptionsWithDescriptions = SpeedOption.DescribeAllValues();
