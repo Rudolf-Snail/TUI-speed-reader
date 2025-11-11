@@ -490,7 +490,7 @@ namespace SpeedReaderTextUserInterface
                         return true;
                     default:
                         Console.Clear();
-                        Console.WriteLine(wordProcessor("This key does not have any function associated with it. Supported keys are: left arrow, right arrow, escape and spacebar. \nPress a key to continue."));
+                        Console.WriteLine(wordProcessor("This key does not have any function associated with it. Supported keys are: left arrow, right arrow, escape and spacebar. Press a key to continue."));
                         Console.ReadKey();
                         break;
                 }
