@@ -29,6 +29,8 @@ namespace SpeedReaderTextUserInterface
             };
         }
 
+        public static string TypeInTextOrNumber(TextOptions option) => TypeInTextOrNumber(option);
+
         public static string DescribeAllValues(SpeedReader speedReader) => Option.DescribeAllValues(ArrayOfValues(), ValueDescriptionText, speedReader);
     }
 
