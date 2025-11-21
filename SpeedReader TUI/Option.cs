@@ -14,7 +14,5 @@ namespace SpeedReaderTextUserInterface
 
             return string.Join("\n", descriptionOfValues);
         }
-        
-        public delegate  string ValueDescriptionText(T value, SpeedReader? speedReader);
     }
 }
