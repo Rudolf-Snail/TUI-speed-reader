@@ -14,5 +14,22 @@ namespace SpeedReaderTextUserInterface
 
             return string.Join("\n", descriptionOfValues);
         }
+
+        public static string DescriptionOfOption<T>(T option, string message, string? currentValue = null, bool applyIfYouWishTo = true) where T : Enum
+        {
+            StringBuilder descriptionOfOption = new($"{Input.ToCapital(TypeInTextOrNumber(option), false)}, ") ;
+
+            if (applyIfYouWishTo)
+                descriptionOfOption.Append($"{IfYouWishTo(message)}");
+            else
+                descriptionOfOption.Append(message);
+
+            if (currentValue != null)
+                descriptionOfOption.Append($" — {currentValue}");
+
+            descriptionOfOption.Append(".");
+
+            return descriptionOfOption.ToString();
+        } 
     }
 }
