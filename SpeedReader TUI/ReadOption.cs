@@ -15,6 +15,8 @@ namespace SpeedReaderTextUserInterface
             _ => throw new ArgumentException($"The specified option — {value} — is not valid."),
         };
 
+        public static string TypeInTextOrNumber(ReadOptions option) => Option.TypeInTextOrNumber(option);
+
         public static string DescribeAllValues() => Option.DescribeAllValues(ArrayOfValues(), ValueDescriptionText);
     }
 
