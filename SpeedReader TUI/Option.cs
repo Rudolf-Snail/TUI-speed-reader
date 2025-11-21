@@ -38,5 +38,7 @@ namespace SpeedReaderTextUserInterface
         public static string TextOrNumber<T>(T option) where T: Enum => $"{option} or {(int)(object)option}";
 
         public static string IfYouWishTo(string message) => $"if you wish to {message}";
+
+        public static string CurrentValue(string currentValue) => $"the current value is {currentValue}";
     }
 }
