@@ -1,8 +1,10 @@
+using System.Text;
+
 namespace SpeedReaderTextUserInterface
 {
-    internal static class Option<T>
+    internal static class Option
     {
-        public static string DescribeAllValues(T[] arrayOfValues, ValueDescriptionText valueDescriptionText, SpeedReader? speedReader = null)
+        public static string DescribeAllValues<T>(T[] arrayOfValues, ValueDescriptionText<T> valueDescriptionText, SpeedReader? speedReader = null) where T: Enum
         {
             var valuesLength = arrayOfValues.Length;
             var descriptionOfValues = new string[valuesLength];
