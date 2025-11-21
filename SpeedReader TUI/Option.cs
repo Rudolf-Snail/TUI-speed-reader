@@ -33,5 +33,8 @@ namespace SpeedReaderTextUserInterface
         } 
 
         public static string TypeInTextOrNumber<T>(T option) where T : Enum => $"type in {TextOrNumber(option)}";
+
+        // Workaround from https://stackoverflow.com/a/51025027/23294278
+        public static string TextOrNumber<T>(T option) where T: Enum => $"{option} or {(int)(object)option}";
     }
 }
