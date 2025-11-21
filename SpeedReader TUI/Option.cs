@@ -42,5 +42,7 @@ namespace SpeedReaderTextUserInterface
         public static string CurrentValue(string currentValue) => $"the current value is {currentValue}";
 
         public delegate string ValueDescriptionText<T>(T value, SpeedReader? speedReader) where T: Enum;
+
+        public delegate string ReturnValue(SpeedReader speedReader);
     }
 }
