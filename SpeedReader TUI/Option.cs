@@ -31,5 +31,7 @@ namespace SpeedReaderTextUserInterface
 
             return descriptionOfOption.ToString();
         } 
+
+        public static string TypeInTextOrNumber<T>(T option) where T : Enum => $"type in {TextOrNumber(option)}";
     }
 }
