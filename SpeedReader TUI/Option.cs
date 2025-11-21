@@ -40,5 +40,7 @@ namespace SpeedReaderTextUserInterface
         public static string IfYouWishTo(string message) => $"if you wish to {message}";
 
         public static string CurrentValue(string currentValue) => $"the current value is {currentValue}";
+
+        public delegate string ValueDescriptionText<T>(T value, SpeedReader? speedReader) where T: Enum;
     }
 }
